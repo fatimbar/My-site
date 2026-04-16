@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>د. [الاسم] | قانون · ذكاء اصطناعي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #0f0e0c;
+  --paper: #f5f0e8;
+  --paper-dark: #ede7d9;
+  --gold: #b8860b;
+  --gold-light: #d4a843;
+  --rust: #8b3a2a;
+  --slate: #2c3e50;
+  --muted: #7a7060;
+  --line: rgba(15,14,12,0.12);
+  --serif-ar: 'Noto Naskh Arabic', serif;
+  --serif-en: 'Playfair Display', serif;
+  --mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif-ar);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── LANG TOGGLE ── */
+.lang-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 40px;
+  background: var(--ink);
+  border-bottom: 1px solid var(--gold);
+}
+.lang-bar .wordmark {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.lang-toggle {
+  display: flex; gap: 6px;
+}
+.lang-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5); font-family: var(--mono);
+  font-size: 11px; padding: 4px 12px; cursor: pointer;
+  letter-spacing: 2px; transition: all 0.2s;
+}
+.lang-btn.active {
+  border-color: var(--gold); color: var(--gold);
+  background: rgba(184,134,11,0.1);
+}
+.lang-btn:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 41px; left: 0; right: 0; z-index: 99;
+  display: flex; justify-content: center; gap: 40px;
+  padding: 14px 40px;
+  background: rgba(245,240,232,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+nav a {
+  text-decoration: none; color: var(--muted);
+  font-size: 13px; letter-spacing: 1px;
+  font-family: var(--mono);
+  transition: color 0.2s;
+  position: relative;
+}
+nav a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+nav a:hover { color: var(--ink); }
+nav a:hover::after { transform: scaleX(1); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding-top: 90px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 60%, rgba(184,134,11,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 30%, rgba(139,58,42,0.04) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.03;
+  background-image:
+    linear-gradient(var(--ink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 80px 10vw;
+  position: relative; z-index: 2;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 32px;
+}
+.hero-eyebrow span {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 4px; color: var(--gold);
+  text-transform: uppercase;
+}
+.eyebrow-line {
+  height: 1px; width: 60px; background: var(--gold);
+}
+
+.hero-name {
+  font-family: var(--serif-ar);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.hero-name .en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  color: var(--muted);
+  font-weight: 400;
+  display: block;
+  margin-top: 6px;
+}
+
+.hero-title {
+  margin: 28px 0;
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 580px;
+  line-height: 2;
+}
+
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 48px;
+}
+.tag {
+  font-family: var(--mono); font-size: 11px;
+  padding: 6px 16px;
+  border: 1px solid var(--line);
+  color: var(--slate); letter-spacing: 1px;
+  background: rgba(255,255,255,0.5);
+}
+
+.hero-cta {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--ink); color: var(--paper);
+  border: none; padding: 14px 32px;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 2px; cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--gold); }
+.btn-outline {
+  background: none; color: var(--ink);
+  border: 1px solid var(--ink); padding: 14px 32px;
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 2px; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-scroll {
+  padding: 32px 10vw;
+  display: flex; align-items: center; gap: 16px;
+  border-top: 1px solid var(--line);
+  position: relative; z-index: 2;
+}
+.scroll-label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 3px; color: var(--muted);
+}
+.scroll-line {
+  height: 1px; flex: 1; background: var(--line);
+}
+.scroll-arrow {
+  width: 32px; height: 32px; border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ── SECTION BASE ── */
+section {
+  padding: 100px 10vw;
+  position: relative;
+}
+section:nth-child(even) { background: var(--paper-dark); }
+
+.section-label {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 48px;
+}
+.section-label span {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 4px; color: var(--gold);
+}
+.section-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--line);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  color: var(--ink);
+}
+
+/* ── ABOUT ── */
+#about .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+.about-photo {
+  position: relative;
+}
+.photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--paper-dark);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 2px;
+}
+.photo-placeholder .icon { font-size: 40px; opacity: 0.3; }
+.photo-frame {
+  position: absolute;
+  bottom: -16px; right: -16px;
+  width: 80%; height: 80%;
+  border: 2px solid var(--gold);
+  z-index: -1;
+}
+
+.cv-highlights {
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+}
+.cv-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.cv-year {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--gold); letter-spacing: 1px;
+  padding-top: 4px;
+}
+.cv-desc { font-size: 0.95rem; }
+.cv-desc strong { display: block; margin-bottom: 4px; }
+.cv-desc small { color: var(--muted); font-size: 0.85rem; }
+
+/* ── METHODOLOGY ── */
+#methodology .method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 48px;
+}
+.method-card {
+  background: var(--paper);
+  padding: 40px 32px;
+  transition: background 0.2s;
+}
+.method-card:hover { background: #fff; }
+.method-num {
+  font-family: var(--mono); font-size: 48px;
+  color: rgba(184,134,11,0.15);
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.method-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.method-text { color: var(--muted); font-size: 0.9rem; line-height: 1.9; }
+
+/* ── RISK TOOL ── */
+#tool {
+  background: var(--ink) !important;
+  color: var(--paper);
+}
+#tool .section-label span { color: var(--gold-light); }
+#tool .section-label::after { background: rgba(255,255,255,0.1); }
+#tool .section-title { color: var(--paper); }
+
+.tool-intro {
+  color: rgba(245,240,232,0.65);
+  margin-bottom: 48px;
+  max-width: 640px;
+  font-size: 1.05rem;
+}
+
+/* Steps */
+.tool-steps {
+  display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.step-indicator {
+  display: flex; align-items: center; gap: 8px;
+}
+.step-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+.step-dot.active {
+  background: var(--gold); border-color: var(--gold);
+  color: var(--ink); font-weight: 700;
+}
+.step-dot.done {
+  background: rgba(184,134,11,0.3); border-color: var(--gold);
+  color: var(--gold);
+}
+.step-connector {
+  height: 1px; width: 30px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* Tool panels */
+.tool-panel {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+.tool-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.panel-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--paper);
+}
+.panel-subtitle {
+  color: rgba(245,240,232,0.5);
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+  font-family: var(--mono);
+  letter-spacing: 1px;
+}
+
+/* Use-case selector */
+.usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.usecase-card {
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(255,255,255,0.03);
+}
+.usecase-card:hover {
+  border-color: var(--gold); background: rgba(184,134,11,0.08);
+}
+.usecase-card.selected {
+  border-color: var(--gold); background: rgba(184,134,11,0.15);
+}
+.usecase-icon { font-size: 24px; margin-bottom: 10px; }
+.usecase-name { font-size: 0.95rem; font-weight: 600; }
+.usecase-desc {
+  font-size: 0.8rem; color: rgba(245,240,232,0.5);
+  margin-top: 4px; font-family: var(--mono);
+}
+
+/* Checklist */
+.checklist-section {
+  margin-bottom: 32px;
+}
+.checklist-section-title {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 3px; color: var(--gold);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(184,134,11,0.3);
+}
+.check-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.check-item:hover { background: rgba(255,255,255,0.03); }
+.check-box {
+  width: 20px; height: 20px;
+  border: 1px solid rgba(255,255,255,0.25);
+  flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.check-item.checked .check-box {
+  background: var(--gold); border-color: var(--gold);
+  color: var(--ink);
+}
+.check-item.risk-high.checked .check-box { background: #c0392b; border-color: #c0392b; color: #fff; }
+.check-item.risk-med.checked .check-box { background: #d4a843; border-color: #d4a843; color: var(--ink); }
+.check-item.risk-low.checked .check-box { background: #27ae60; border-color: #27ae60; color: #fff; }
+
+.check-text { flex: 1; }
+.check-label { font-size: 0.95rem; margin-bottom: 3px; }
+.check-detail {
+  font-size: 0.8rem; color: rgba(245,240,232,0.45);
+  font-family: var(--mono);
+}
+.risk-badge {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 2px; padding: 3px 8px;
+  border-radius: 2px; flex-shrink: 0;
+  align-self: flex-start; margin-top: 3px;
+}
+.risk-badge.H { background: rgba(192,57,43,0.2); color: #e74c3c; }
+.risk-badge.M { background: rgba(212,168,67,0.2); color: var(--gold-light); }
+.risk-badge.L { background: rgba(39,174,96,0.2); color: #2ecc71; }
+
+/* Progress bar */
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.08);
+  height: 4px; margin-bottom: 40px; position: relative;
+}
+.progress-bar-fill {
+  height: 100%; background: var(--gold);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* Results */
+.result-header {
+  text-align: center; padding: 40px 0; margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.result-score-ring {
+  width: 120px; height: 120px; margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+.result-score-ring svg {
+  position: absolute; top: 0; left: 0;
+  transform: rotate(-90deg);
+}
+.result-score-num {
+  font-family: var(--mono); font-size: 2rem;
+  font-weight: 500; position: relative; z-index: 1;
+}
+.result-score-label {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 2px; color: rgba(245,240,232,0.5);
+  position: relative; z-index: 1;
+}
+.result-verdict {
+  font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;
+}
+.result-summary { color: rgba(245,240,232,0.6); font-size: 0.95rem; max-width: 500px; margin: 0 auto; }
+
+.result-breakdown {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+  margin-bottom: 40px;
+}
+.breakdown-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 24px 20px; text-align: center;
+}
+.breakdown-num {
+  font-family: var(--mono); font-size: 2rem;
+  font-weight: 500; margin-bottom: 4px;
+}
+.breakdown-label {
+  font-size: 0.8rem; color: rgba(245,240,232,0.5);
+  font-family: var(--mono); letter-spacing: 1px;
+}
+
+.recommendations {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+.rec-title {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 3px; color: var(--gold);
+  margin-bottom: 20px;
+}
+.rec-item {
+  display: flex; gap: 16px; padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.9rem;
+}
+.rec-item:last-child { border-bottom: none; }
+.rec-icon { flex-shrink: 0; font-size: 16px; }
+
+/* Tool nav */
+.tool-nav {
+  display: flex; gap: 12px; margin-top: 32px; justify-content: flex-end;
+}
+.btn-ghost {
+  background: none; color: rgba(245,240,232,0.5);
+  border: 1px solid rgba(255,255,255,0.15); padding: 12px 28px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 2px; cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--paper); border-color: rgba(255,255,255,0.4); }
+.btn-gold {
+  background: var(--gold); color: var(--ink);
+  border: none; padding: 12px 28px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 2px; cursor: pointer;
+  font-weight: 600; transition: background 0.2s;
+}
+.btn-gold:hover { background: var(--gold-light); }
+.btn-gold:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── SERVICES ── */
+#services .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 48px;
+}
+.service-card {
+  background: var(--paper);
+  padding: 48px 36px;
+  transition: background 0.2s;
+}
+.service-card:hover { background: #fff; }
+.service-icon { font-size: 32px; margin-bottom: 24px; opacity: 0.7; }
+.service-title {
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 12px;
+}
+.service-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.9; margin-bottom: 24px; }
+.service-items {
+  list-style: none;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.service-items li {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 1px;
+  padding: 6px 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.service-items li::before {
+  content: '→'; color: var(--gold);
+}
+
+/* ── CONTACT ── */
+#contact {
+  text-align: center;
+}
+#contact .section-label { justify-content: center; }
+#contact .section-label::after { display: none; }
+.contact-text {
+  color: var(--muted); max-width: 500px; margin: 0 auto 48px;
+  font-size: 1.05rem;
+}
+.contact-links {
+  display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+.contact-link {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line); padding: 14px 28px;
+  text-decoration: none; color: var(--ink);
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 2px;
+  transition: all 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--gold); color: var(--gold);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 40px 10vw;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer .footer-copy {
+  font-family: var(--mono); font-size: 11px;
+  color: rgba(245,240,232,0.3); letter-spacing: 1px;
+}
+footer .footer-mark {
+  font-family: var(--serif-en);
+  font-style: italic; color: var(--gold);
+  font-size: 16px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { gap: 20px; padding: 14px 20px; }
+  section { padding: 70px 6vw; }
+  #about .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  #methodology .method-grid { grid-template-columns: 1fr; }
+  #services .services-grid { grid-template-columns: 1fr; }
+  .result-breakdown { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .lang-bar { padding: 12px 20px; }
+  .hero-content { padding: 60px 6vw; }
+  nav { display: none; }
+}
+
+/* ── EN MODE ── */
+body.en {
+  direction: ltr;
+  font-family: var(--serif-en);
+}
+body.en .ar { display: none; }
+body.en .en-text { display: block !important; }
+body.ar .ar { display: block; }
+body.ar .en-text { display: none !important; }
+
+.en-text { display: none; font-family: var(--serif-en); }
+</style>
+</head>
+
+<body class="ar">
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <span class="wordmark">LAW × AI</span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ar')">AR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#about" class="ar">عني</a>
+  <a href="#about" class="en-text">About</a>
+  <a href="#methodology" class="ar">المنهجية</a>
+  <a href="#methodology" class="en-text">Methodology</a>
+  <a href="#tool" class="ar">أداة التقييم</a>
+  <a href="#tool" class="en-text">Risk Tool</a>
+  <a href="#services" class="ar">الخدمات</a>
+  <a href="#services" class="en-text">Services</a>
+  <a href="#contact" class="ar">التواصل</a>
+  <a href="#contact" class="en-text">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="ar">باحثة · محامية</span>
+      <span class="en-text">Researcher · Legal Scholar</span>
+    </div>
+
+    <h1 class="hero-name">
+      <span class="ar">[اسمك هنا]</span>
+      <span class="en-text">[Your Name]</span>
+      <span class="en">[Your Name in English]</span>
+    </h1>
+
+    <p class="hero-title ar">
+      متخصصة في تقاطع القانون والذكاء الاصطناعي —<br>
+      بحث أكاديمي، تقييم نقدي لأدوات AI القانونية،<br>
+      ومساهمة في صياغة الأطر التنظيمية والأخلاقية.
+    </p>
+    <p class="hero-title en-text" style="font-family: var(--serif-en);">
+      Specializing in the intersection of Law and Artificial Intelligence —<br>
+      academic research, critical evaluation of legal AI tools,<br>
+      and contribution to regulatory and ethical frameworks.
+    </p>
+
+    <div class="hero-tags">
+      <span class="tag ar">قانون الذكاء الاصطناعي</span>
+      <span class="tag en-text">AI Law</span>
+      <span class="tag ar">أخلاقيات التقنية</span>
+      <span class="tag en-text">Tech Ethics</span>
+      <span class="tag ar">تنظيم البيانات</span>
+      <span class="tag en-text">Data Regulation</span>
+      <span class="tag ar">LegalTech</span>
+      <span class="tag en-text" style="display:flex!important">LegalTech</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#tool" class="btn-primary ar">جرّب أداة التقييم</a>
+      <a href="#tool" class="btn-primary en-text">Try the Risk Tool</a>
+      <a href="#contact" class="btn-outline ar">تواصل معي</a>
+      <a href="#contact" class="btn-outline en-text">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-label ar">اكتشف</span>
+    <span class="scroll-label en-text">SCROLL</span>
+    <div class="scroll-line"></div>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">
+    <span class="ar">01 — عني</span>
+    <span class="en-text">01 — ABOUT</span>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 class="section-title ar">خلفيتي المهنية والأكاديمية</h2>
+      <h2 class="section-title en-text">Professional & Academic Background</h2>
+
+      <p class="ar">[نبذة عامة عنك — من أنتِ، مسيرتك، وما الذي يجعل موقعك في هذا المجال فريداً. أضيفي هنا بضعة أسطر تصفين فيها رحلتك من القانون إلى تقاطعه مع الذكاء الاصطناعي.]</p>
+      <p class="en-text">[Brief professional narrative — who you are, your journey, and what makes your perspective unique at the intersection of law and AI.]</p>
+
+      <p class="ar">[يمكنك إضافة فقرة ثانية تتناول فيها الأسئلة البحثية التي تشغلك، أو الفجوة في المجال التي تسعين لسدّها.]</p>
+      <p class="en-text">[Second paragraph on your research questions or the gap you're working to address.]</p>
+
+      <div class="cv-highlights">
+        <div class="cv-item">
+          <div class="cv-year">20XX</div>
+          <div class="cv-desc">
+            <strong class="ar">[المؤسسة الأكاديمية]</strong>
+            <strong class="en-text">[Academic Institution]</strong>
+            <small class="ar">[الدرجة العلمية / البرنامج]</small>
+            <small class="en-text">[Degree / Program]</small>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-year">20XX</div>
+          <div class="cv-desc">
+            <strong class="ar">[خبرة مهنية أو بحثية]</strong>
+            <strong class="en-text">[Professional / Research Experience]</strong>
+            <small class="ar">[المؤسسة]</small>
+            <small class="en-text">[Institution]</small>
+          </div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-year">20XX</div>
+          <div class="cv-desc">
+            <strong class="ar">[نشر / مؤتمر / جائزة]</strong>
+            <strong class="en-text">[Publication / Conference / Award]</strong>
+            <small class="ar">[التفاصيل]</small>
+            <small class="en-text">[Details]</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-photo">
+      <div class="photo-placeholder">
+        <div class="icon">◈</div>
+        <span class="ar">صورتك هنا</span>
+        <span class="en-text">Your photo here</span>
+      </div>
+      <div class="photo-frame"></div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="methodology">
+  <div class="section-label">
+    <span class="ar">02 — المنهجية</span>
+    <span class="en-text">02 — METHODOLOGY</span>
+  </div>
+
+  <h2 class="section-title ar">إطار تقييم أدوات AI القانونية</h2>
+  <h2 class="section-title en-text">Framework for Evaluating Legal AI Tools</h2>
+  <p class="ar" style="color:var(--muted); max-width:640px; margin-bottom:12px;">
+    أعتمد في تقييم أدوات الذكاء الاصطناعي للعمل القانوني منهجية متعددة المعايير تجمع بين الأبعاد التقنية والقانونية والأخلاقية — لأن أداةً قد تكون فعّالة تقنياً وغير مقبولة مهنياً أو قانونياً في آنٍ واحد.
+  </p>
+  <p class="en-text" style="color:var(--muted); max-width:640px; margin-bottom:12px; display:none;">
+    My evaluation framework for legal AI tools integrates technical, legal, and ethical dimensions — because a tool may be technically efficient yet professionally or legally unacceptable at the same time.
+  </p>
+
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-num">01</div>
+      <div class="method-title ar">الأداء والموثوقية</div>
+      <div class="method-title en-text">Performance & Reliability</div>
+      <p class="method-text ar">دقة المخرجات، معدل الهلوسة، الاتساق عبر السياقات القانونية المختلفة، ومدى قابلية التحقق من النتائج.</p>
+      <p class="method-text en-text">Output accuracy, hallucination rates, consistency across legal contexts, and verifiability of results.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-num">02</div>
+      <div class="method-title ar">الامتثال القانوني والتنظيمي</div>
+      <div class="method-title en-text">Legal & Regulatory Compliance</div>
+      <p class="method-text ar">التوافق مع أنظمة حماية البيانات، قواعد السرية المهنية، والأطر التنظيمية للذكاء الاصطناعي المعمول بها.</p>
+      <p class="method-text en-text">Alignment with data protection regulations, professional confidentiality rules, and applicable AI regulatory frameworks.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-num">03</div>
+      <div class="method-title ar">المخاطر الأخلاقية والمهنية</div>
+      <div class="method-title en-text">Ethical & Professional Risks</div>
+      <p class="method-text ar">التحيزات الكامنة في النموذج، تأثير الأداة على استقلالية المحامي وحكمه المهني، والمساءلة عند الخطأ.</p>
+      <p class="method-text en-text">Model biases, impact on lawyer autonomy and professional judgment, and accountability in cases of error.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RISK TOOL -->
+<section id="tool">
+  <div class="section-label">
+    <span class="ar">03 — أداة التقييم</span>
+    <span class="en-text">03 — RISK TOOL</span>
+  </div>
+
+  <h2 class="section-title ar">مقيّم المخاطر القانونية والأخلاقية لاستخدام AI</h2>
+  <h2 class="section-title en-text">Legal & Ethical AI Risk Assessment Tool</h2>
+  <p class="tool-intro ar">أداة تفاعلية موجّهة للممارسين القانونيين لتقييم مدى جاهزية أي أداة ذكاء اصطناعي للاستخدام في بيئتهم المهنية — قبل الاعتماد عليها في العمل الفعلي.</p>
+  <p class="tool-intro en-text" style="display:none;">An interactive tool for legal practitioners to assess the readiness of any AI tool for use in their professional environment — before relying on it in actual work.</p>
+
+  <!-- STEPS -->
+  <div class="tool-steps">
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot1">1</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step-indicator">
+      <div class="step-dot" id="dot2">2</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step-indicator">
+      <div class="step-dot" id="dot3">3</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step-indicator">
+      <div class="step-dot" id="dot4">✓</div>
+    </div>
+  </div>
+
+  <!-- PANEL 1: USE CASE -->
+  <div class="tool-panel active" id="panel1">
+    <p class="panel-title ar">ما حالة الاستخدام؟</p>
+    <p class="panel-title en-text">What is the use case?</p>
+    <p class="panel-subtitle ar">اختر نوع العمل القانوني الذي تنوي فيه استخدام الأداة</p>
+    <p class="panel-subtitle en-text">SELECT THE LEGAL WORK TYPE WHERE YOU PLAN TO USE THE TOOL</p>
+
+    <div class="usecase-grid">
+      <div class="usecase-card" data-case="contract" onclick="selectCase(this)">
+        <div class="usecase-icon">📄</div>
+        <div class="usecase-name ar">صياغة العقود</div>
+        <div class="usecase-name en-text">Contract Drafting</div>
+        <div class="usecase-desc ar">إعداد ومراجعة العقود</div>
+        <div class="usecase-desc en-text">Drafting & reviewing contracts</div>
+      </div>
+      <div class="usecase-card" data-case="research" onclick="selectCase(this)">
+        <div class="usecase-icon">🔍</div>
+        <div class="usecase-name ar">البحث القانوني</div>
+        <div class="usecase-name en-text">Legal Research</div>
+        <div class="usecase-desc ar">تحليل السوابق والتشريعات</div>
+        <div class="usecase-desc en-text">Case law & legislation analysis</div>
+      </div>
+      <div class="usecase-card" data-case="litigation" onclick="selectCase(this)">
+        <div class="usecase-icon">⚖️</div>
+        <div class="usecase-name ar">التقاضي</div>
+        <div class="usecase-name en-text">Litigation</div>
+        <div class="usecase-desc ar">إعداد المذكرات والحجج</div>
+        <div class="usecase-desc en-text">Briefs & legal arguments</div>
+      </div>
+      <div class="usecase-card" data-case="compliance" onclick="selectCase(this)">
+        <div class="usecase-icon">🛡️</div>
+        <div class="usecase-name ar">الامتثال</div>
+        <div class="usecase-name en-text">Compliance</div>
+        <div class="usecase-desc ar">مراجعة الالتزام التنظيمي</div>
+        <div class="usecase-desc en-text">Regulatory compliance review</div>
+      </div>
+      <div class="usecase-card" data-case="advisory" onclick="selectCase(this)">
+        <div class="usecase-icon">💼</div>
+        <div class="usecase-name ar">الاستشارات</div>
+        <div class="usecase-name en-text">Legal Advisory</div>
+        <div class="usecase-desc ar">تقديم الرأي القانوني</div>
+        <div class="usecase-desc en-text">Providing legal opinions</div>
+      </div>
+      <div class="usecase-card" data-case="due-diligence" onclick="selectCase(this)">
+        <div class="usecase-icon">🔬</div>
+        <div class="usecase-name ar">الفحص القانوني</div>
+        <div class="usecase-name en-text">Due Diligence</div>
+        <div class="usecase-desc ar">تدقيق الوثائق والملفات</div>
+        <div class="usecase-desc en-text">Document & file review</div>
+      </div>
+    </div>
+
+    <div class="tool-nav">
+      <button class="btn-gold" id="btn-next1" onclick="goPanel(2)" disabled>
+        <span class="ar">التالي ←</span>
+        <span class="en-text">Next →</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL 2: CHECKLIST -->
+  <div class="tool-panel" id="panel2">
+    <p class="panel-title ar">قائمة المخاطر</p>
+    <p class="panel-title en-text">Risk Checklist</p>
+    <p class="panel-subtitle ar">اختر كل ما ينطبق على الأداة أو السياق الذي تعمل فيه</p>
+    <p class="panel-subtitle en-text">SELECT ALL THAT APPLY TO THE TOOL OR CONTEXT</p>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+
+    <!-- SECTION A -->
+    <div class="checklist-section">
+      <div class="checklist-section-title ar">أ — سرية البيانات والخصوصية</div>
+      <div class="checklist-section-title en-text">A — DATA CONFIDENTIALITY & PRIVACY</div>
+
+      <div class="check-item risk-high" onclick="toggleCheck(this)" data-risk="H" data-points="3">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">الأداة ترسل بيانات العملاء إلى خوادم خارجية أو سحابة طرف ثالث دون ضمانات واضحة</div>
+          <div class="check-label en-text">The tool sends client data to external servers or third-party cloud without clear guarantees</div>
+          <div class="check-detail ar">مخاطر: انتهاك السرية المهنية، GDPR، أنظمة محلية</div>
+          <div class="check-detail en-text">Risk: breach of professional confidentiality, GDPR, local regulations</div>
+        </div>
+        <span class="risk-badge H">HIGH</span>
+      </div>
+
+      <div class="check-item risk-high" onclick="toggleCheck(this)" data-risk="H" data-points="3">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">سياسة الخصوصية تسمح للشركة باستخدام مدخلاتك لتدريب نماذجها</div>
+          <div class="check-label en-text">Privacy policy allows the company to use your inputs for model training</div>
+          <div class="check-detail ar">مخاطر: تسريب معلومات سرية لنماذج مستقبلية</div>
+          <div class="check-detail en-text">Risk: leaking confidential information into future model outputs</div>
+        </div>
+        <span class="risk-badge H">HIGH</span>
+      </div>
+
+      <div class="check-item risk-med" onclick="toggleCheck(this)" data-risk="M" data-points="2">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">لا يوجد اتفاقية معالجة بيانات (DPA) مع مزود الأداة</div>
+          <div class="check-label en-text">No Data Processing Agreement (DPA) exists with the tool provider</div>
+          <div class="check-detail ar">مخاطر: غياب الأساس القانوني للمعالجة</div>
+          <div class="check-detail en-text">Risk: absence of legal basis for data processing</div>
+        </div>
+        <span class="risk-badge M">MED</span>
+      </div>
+
+      <div class="check-item risk-low" onclick="toggleCheck(this)" data-risk="L" data-points="1">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">الأداة تتيح خيار حذف البيانات بعد الجلسة</div>
+          <div class="check-label en-text">The tool offers data deletion option after each session</div>
+          <div class="check-detail ar">إيجابي: يقلل مخاطر الاحتفاظ بالبيانات</div>
+          <div class="check-detail en-text">Positive: reduces data retention risks</div>
+        </div>
+        <span class="risk-badge L">LOW</span>
+      </div>
+    </div>
+
+    <!-- SECTION B -->
+    <div class="checklist-section">
+      <div class="checklist-section-title ar">ب — دقة المخرجات والموثوقية</div>
+      <div class="checklist-section-title en-text">B — OUTPUT ACCURACY & RELIABILITY</div>
+
+      <div class="check-item risk-high" onclick="toggleCheck(this)" data-risk="H" data-points="3">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">الأداة تولّد مراجع قانونية أو أحكام قضائية لا يمكن التحقق من وجودها</div>
+          <div class="check-label en-text">The tool generates legal citations or case references that cannot be verified</div>
+          <div class="check-detail ar">مخاطر: الهلوسة القانونية — خطر مباشر على سمعة المحامي</div>
+          <div class="check-detail en-text">Risk: legal hallucination — direct threat to lawyer's reputation</div>
+        </div>
+        <span class="risk-badge H">HIGH</span>
+      </div>
+
+      <div class="check-item risk-high" onclick="toggleCheck(this)" data-risk="H" data-points="3">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">النموذج لا يشير إلى حدوده أو مستوى ثقته بالمخرجات</div>
+          <div class="check-label en-text">The model does not indicate its limitations or confidence level</div>
+          <div class="check-detail ar">مخاطر: المحامي يعتمد على معلومات خاطئة دون تنبيه</div>
+          <div class="check-detail en-text">Risk: lawyer relies on incorrect information without warning</div>
+        </div>
+        <span class="risk-badge H">HIGH</span>
+      </div>
+
+      <div class="check-item risk-med" onclick="toggleCheck(this)" data-risk="M" data-points="2">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">قاعدة بيانات الأداة القانونية غير محدّثة أو تغطي نطاقاً جغرافياً مختلفاً</div>
+          <div class="check-label en-text">The tool's legal database is outdated or covers a different jurisdiction</div>
+          <div class="check-detail ar">مخاطر: تطبيق تشريعات ملغاة أو غير سارية</div>
+          <div class="check-detail en-text">Risk: applying repealed or inapplicable legislation</div>
+        </div>
+        <span class="risk-badge M">MED</span>
+      </div>
+
+      <div class="check-item risk-med" onclick="toggleCheck(this)" data-risk="M" data-points="2">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">لا توجد دراسات تحقق (benchmarks) مستقلة لأداء الأداة في السياق القانوني</div>
+          <div class="check-label en-text">No independent benchmarks exist for the tool's performance in legal context</div>
+          <div class="check-detail ar">مخاطر: الاعتماد على ادعاءات تسويقية غير مُثبتة</div>
+          <div class="check-detail en-text">Risk: relying on unverified marketing claims</div>
+        </div>
+        <span class="risk-badge M">MED</span>
+      </div>
+    </div>
+
+    <!-- SECTION C -->
+    <div class="checklist-section">
+      <div class="checklist-section-title ar">ج — المساءلة والتحيز</div>
+      <div class="checklist-section-title en-text">C — ACCOUNTABILITY & BIAS</div>
+
+      <div class="check-item risk-high" onclick="toggleCheck(this)" data-risk="H" data-points="3">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">آلية عمل النموذج غير شفافة (صندوق أسود) — لا يمكن تفسير كيفية التوصل للنتيجة</div>
+          <div class="check-label en-text">The model operates as a black box — the reasoning behind outputs cannot be explained</div>
+          <div class="check-detail ar">مخاطر: تعذّر الطعن أو الدفاع عن القرار أمام محكمة أو عميل</div>
+          <div class="check-detail en-text">Risk: inability to challenge or defend the decision before court or client</div>
+        </div>
+        <span class="risk-badge H">HIGH</span>
+      </div>
+
+      <div class="check-item risk-med" onclick="toggleCheck(this)" data-risk="M" data-points="2">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">النموذج مدرَّب على بيانات مرتبطة بنظام قانوني مختلف (Common Law مثلاً)</div>
+          <div class="check-label en-text">The model is trained on data from a different legal system (e.g., Common Law)</div>
+          <div class="check-detail ar">مخاطر: تحيز منهجي نحو مفاهيم وحلول غير ملائمة للسياق</div>
+          <div class="check-detail en-text">Risk: systematic bias toward concepts unsuitable for your legal context</div>
+        </div>
+        <span class="risk-badge M">MED</span>
+      </div>
+
+      <div class="check-item risk-med" onclick="toggleCheck(this)" data-risk="M" data-points="2">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">لا توجد سياسة واضحة تحدد من يتحمل المسؤولية عند خطأ الأداة</div>
+          <div class="check-label en-text">No clear policy defining liability when the tool makes an error</div>
+          <div class="check-detail ar">مخاطر: المحامي يتحمل كامل المسؤولية المهنية</div>
+          <div class="check-detail en-text">Risk: lawyer bears full professional responsibility</div>
+        </div>
+        <span class="risk-badge M">MED</span>
+      </div>
+    </div>
+
+    <!-- SECTION D -->
+    <div class="checklist-section">
+      <div class="checklist-section-title ar">د — الاستقلالية المهنية</div>
+      <div class="checklist-section-title en-text">D — PROFESSIONAL INDEPENDENCE</div>
+
+      <div class="check-item risk-high" onclick="toggleCheck(this)" data-risk="H" data-points="3">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">يميل الممارسون لقبول مخرجات الأداة دون مراجعة نقدية (أثر الأتمتة)</div>
+          <div class="check-label en-text">Practitioners tend to accept tool outputs without critical review (automation bias)</div>
+          <div class="check-detail ar">مخاطر: تآكل الحكم المهني، التعرض للمسؤولية</div>
+          <div class="check-detail en-text">Risk: erosion of professional judgment, liability exposure</div>
+        </div>
+        <span class="risk-badge H">HIGH</span>
+      </div>
+
+      <div class="check-item risk-med" onclick="toggleCheck(this)" data-risk="M" data-points="2">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">الأداة لا تتيح للمستخدم الاطلاع على مصادر استدلالها أو مراجعها</div>
+          <div class="check-label en-text">The tool does not allow users to view its reasoning sources or references</div>
+          <div class="check-detail ar">مخاطر: تعذّر التحقق المستقل من النتائج</div>
+          <div class="check-detail en-text">Risk: inability to independently verify results</div>
+        </div>
+        <span class="risk-badge M">MED</span>
+      </div>
+
+      <div class="check-item risk-low" onclick="toggleCheck(this)" data-risk="L" data-points="1">
+        <div class="check-box">✓</div>
+        <div class="check-text">
+          <div class="check-label ar">الفريق المستخدم للأداة لم يتلقَّ تدريباً على حدودها ومخاطرها</div>
+          <div class="check-label en-text">The team using the tool has not received training on its limitations and risks</div>
+          <div class="check-detail ar">مخاطر: سوء استخدام بحسن نية</div>
+          <div class="check-detail en-text">Risk: well-intentioned misuse</div>
+        </div>
+        <span class="risk-badge L">LOW</span>
+      </div>
+    </div>
+
+    <div class="tool-nav">
+      <button class="btn-ghost" onclick="goPanel(1)">
+        <span class="ar">← السابق</span>
+        <span class="en-text">← Back</span>
+      </button>
+      <button class="btn-gold" onclick="calculateResults()">
+        <span class="ar">عرض النتائج</span>
+        <span class="en-text">Show Results</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL 3: RESULTS -->
+  <div class="tool-panel" id="panel3">
+    <div class="result-header">
+      <div class="result-score-ring" id="scoreRing">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+          <circle id="scoreCircle" cx="60" cy="60" r="52" fill="none" stroke="#b8860b" stroke-width="8"
+            stroke-dasharray="326.7" stroke-dashoffset="326.7"
+            style="transition: stroke-dashoffset 1.2s ease;"/>
+        </svg>
+        <div class="result-score-num" id="scoreNum">0</div>
+        <div class="result-score-label">SCORE</div>
+      </div>
+      <div class="result-verdict" id="verdict"></div>
+      <div class="result-summary" id="summary"></div>
+    </div>
+
+    <div class="result-breakdown">
+      <div class="breakdown-card">
+        <div class="breakdown-num" id="highCount" style="color:#e74c3c">0</div>
+        <div class="breakdown-label ar">مخاطر عالية</div>
+        <div class="breakdown-label en-text">HIGH RISKS</div>
+      </div>
+      <div class="breakdown-card">
+        <div class="breakdown-num" id="medCount" style="color:var(--gold-light)">0</div>
+        <div class="breakdown-label ar">مخاطر متوسطة</div>
+        <div class="breakdown-label en-text">MED RISKS</div>
+      </div>
+      <div class="breakdown-card">
+        <div class="breakdown-num" id="lowCount" style="color:#2ecc71">0</div>
+        <div class="breakdown-label ar">مخاطر منخفضة</div>
+        <div class="breakdown-label en-text">LOW RISKS</div>
+      </div>
+    </div>
+
+    <div class="recommendations" id="recommendations"></div>
+
+    <div class="tool-nav" style="justify-content:center; gap:20px;">
+      <button class="btn-ghost" onclick="resetTool()">
+        <span class="ar">إعادة التقييم</span>
+        <span class="en-text">Start Over</span>
+      </button>
+      <a href="#contact" class="btn-gold" style="text-decoration:none; display:inline-block;">
+        <span class="ar">طلب استشارة</span>
+        <span class="en-text">Request Consultation</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">
+    <span class="ar">04 — الخدمات</span>
+    <span class="en-text">04 — SERVICES</span>
+  </div>
+
+  <h2 class="section-title ar">كيف يمكنني مساعدتك</h2>
+  <h2 class="section-title en-text">How I Can Help</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <div class="service-title ar">الاستشارات التخصصية</div>
+      <div class="service-title en-text">Specialist Consulting</div>
+      <p class="service-desc ar">تقييم أدوات AI القانونية وملاءمتها للبيئة التنظيمية والمهنية، وتقديم توصيات قابلة للتطبيق للفرق القانونية.</p>
+      <p class="service-desc en-text">Evaluating legal AI tools for regulatory and professional fit, providing actionable recommendations for legal teams.</p>
+      <ul class="service-items">
+        <li class="ar">تقييم ومقارنة الأدوات</li>
+        <li class="en-text">Tool evaluation & comparison</li>
+        <li class="ar">سياسات استخدام AI الداخلية</li>
+        <li class="en-text">Internal AI usage policies</li>
+        <li class="ar">الامتثال والمخاطر</li>
+        <li class="en-text">Compliance & risk mapping</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <div class="service-title ar">الدورات والتدريب</div>
+      <div class="service-title en-text">Training & Courses</div>
+      <p class="service-desc ar">برامج تدريبية للمحامين والمؤسسات القانونية على التعامل المهني والنقدي مع أدوات الذكاء الاصطناعي.</p>
+      <p class="service-desc en-text">Training programs for lawyers and legal institutions on professional and critical engagement with AI tools.</p>
+      <ul class="service-items">
+        <li class="ar">ورش عمل للفرق القانونية</li>
+        <li class="en-text">Workshops for legal teams</li>
+        <li class="ar">برامج مؤسسية مخصصة</li>
+        <li class="en-text">Custom institutional programs</li>
+        <li class="ar">محتوى للمؤتمرات المهنية</li>
+        <li class="en-text">Conference & CPD content</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✍️</div>
+      <div class="service-title ar">الكتابة والمساهمات</div>
+      <div class="service-title en-text">Writing & Contributions</div>
+      <p class="service-desc ar">مقالات بحثية، تقارير، وتعليقات تحليلية على السياسات والتشريعات المتعلقة بتنظيم الذكاء الاصطناعي.</p>
+      <p class="service-desc en-text">Research articles, reports, and analytical commentary on AI regulation policies and legislation.</p>
+      <ul class="service-items">
+        <li class="ar">تقارير للمؤسسات والهيئات</li>
+        <li class="en-text">Institutional reports</li>
+        <li class="ar">تحليل السياسات التشريعية</li>
+        <li class="en-text">Legislative policy analysis</li>
+        <li class="ar">المشاركة في المؤتمرات</li>
+        <li class="en-text">Conference participation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">
+    <span class="ar">05 — التواصل</span>
+    <span class="en-text">05 — CONTACT</span>
+  </div>
+
+  <h2 class="section-title ar">لنتواصل</h2>
+  <h2 class="section-title en-text">Let's Connect</h2>
+
+  <p class="contact-text ar">[أضيفي هنا جملة أو اثنتين تدعوان فيهما الزوار إلى التواصل — سواء للاستشارات أو الدورات أو التعارف المهني.]</p>
+  <p class="contact-text en-text">[Add a brief invitation for contact — consultations, courses, or professional connection.]</p>
+
+  <div class="contact-links">
+    <a href="mailto:your@email.com" class="contact-link">
+      ✉ <span class="ar">البريد الإلكتروني</span>
+      <span class="en-text">Email</span>
+    </a>
+    <a href="https://linkedin.com" class="contact-link" target="_blank">
+      in <span>LinkedIn</span>
+    </a>
+    <a href="#" class="contact-link">
+      🎓 <span class="ar">الصفحة الأكاديمية</span>
+      <span class="en-text">Academic Profile</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy ar">© 2025 — [اسمك] — جميع الحقوق محفوظة</span>
+  <span class="footer-copy en-text">© 2025 — [Your Name] — All rights reserved</span>
+  <span class="footer-mark">Law × AI</span>
+</footer>
+
+<script>
+// ── LANGUAGE TOGGLE ──
+function setLang(lang) {
+  document.body.classList.toggle('ar', lang === 'ar');
+  document.body.classList.toggle('en', lang === 'en');
+  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', lang);
+
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase());
+  });
+
+  if (lang === 'en') {
+    document.querySelectorAll('.en-text').forEach(el => el.style.display = 'block');
+    document.querySelectorAll('.ar:not(html):not(body)').forEach(el => {
+      if (!el.classList.contains('en-text')) el.style.display = 'none';
+    });
+  } else {
+    document.querySelectorAll('.en-text').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.ar:not(html):not(body)').forEach(el => {
+      el.style.display = '';
+    });
+  }
+}
+
+// ── USE CASE SELECTION ──
+function selectCase(el) {
+  document.querySelectorAll('.usecase-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('btn-next1').disabled = false;
+}
+
+// ── TOGGLE CHECK ──
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = document.querySelectorAll('.check-item').length;
+  const checked = document.querySelectorAll('.check-item.checked').length;
+  document.getElementById('progress-fill').style.width = (checked / total * 100) + '%';
+}
+
+// ── PANEL NAVIGATION ──
+function goPanel(n) {
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel' + n).classList.add('active');
+
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('dot' + i);
+    if (!dot) continue;
+    dot.classList.remove('active', 'done');
+    if (i < n) dot.classList.add('done');
+    else if (i === n) dot.classList.add('active');
+  }
+}
+
+// ── CALCULATE RESULTS ──
+function calculateResults() {
+  const checked = document.querySelectorAll('.check-item.checked');
+  let high = 0, med = 0, low = 0, totalPoints = 0;
+
+  checked.forEach(item => {
+    const risk = item.dataset.risk;
+    const pts = parseInt(item.dataset.points);
+    totalPoints += pts;
+    if (risk === 'H') high++;
+    else if (risk === 'M') med++;
+    else low++;
+  });
+
+  const maxPoints = document.querySelectorAll('.check-item').length * 3;
+  const riskPct = Math.round((totalPoints / maxPoints) * 100);
+  const score = 100 - riskPct;
+
+  goPanel(3);
+
+  // Animate score
+  setTimeout(() => {
+    document.getElementById('scoreNum').textContent = score;
+    const circumference = 326.7;
+    const offset = circumference - (score / 100) * circumference;
+    const circle = document.getElementById('scoreCircle');
+    circle.style.strokeDashoffset = offset;
+
+    if (score >= 75) circle.style.stroke = '#27ae60';
+    else if (score >= 50) circle.style.stroke = '#d4a843';
+    else circle.style.stroke = '#c0392b';
+  }, 100);
+
+  document.getElementById('highCount').textContent = high;
+  document.getElementById('medCount').textContent = med;
+  document.getElementById('lowCount').textContent = low;
+
+  const isAr = document.body.classList.contains('ar');
+
+  // Verdict
+  let verdict, summary;
+  if (score >= 75) {
+    verdict = isAr ? '✓ مستوى مخاطر مقبول' : '✓ Acceptable Risk Level';
+    summary = isAr
+      ? 'الأداة تقع في النطاق المقبول مع اتخاذ الاحتياطات المناسبة. يُنصح بمراجعة النقاط المُحددة قبل الاعتماد الكامل.'
+      : 'The tool falls within acceptable range with appropriate precautions. Review flagged points before full adoption.';
+  } else if (score >= 50) {
+    verdict = isAr ? '⚠ مخاطر معتدلة — تتطلب احتياطات' : '⚠ Moderate Risk — Precautions Required';
+    summary = isAr
+      ? 'الأداة تحمل مخاطر تستوجب معالجة قبل النشر. يُنصح بوضع ضمانات واضحة وبروتوكولات مراجعة بشرية.'
+      : 'The tool carries risks requiring attention before deployment. Clear safeguards and human review protocols are recommended.';
+  } else {
+    verdict = isAr ? '✗ مخاطر عالية — غير مُوصى به حالياً' : '✗ High Risk — Not Currently Recommended';
+    summary = isAr
+      ? 'المخاطر المرصودة تفوق الفوائد المحتملة في الوضع الراهن. يُنصح بعدم الاعتماد على هذه الأداة دون معالجة جذرية للمشكلات المُحددة.'
+      : 'The identified risks outweigh potential benefits in the current state. Not recommended without fundamental resolution of flagged issues.';
+  }
+
+  document.getElementById('verdict').textContent = verdict;
+  document.getElementById('summary').textContent = summary;
+
+  // Recommendations
+  const recEl = document.getElementById('recommendations');
+  let recsHTML = `<div class="rec-title">${isAr ? 'التوصيات' : 'RECOMMENDATIONS'}</div>`;
+
+  if (high > 0) recsHTML += `<div class="rec-item"><span class="rec-icon">🔴</span><span>${isAr ? `تم رصد ${high} مخاطر عالية تستوجب معالجة فورية قبل أي استخدام مهني.` : `${high} high-risk issue(s) identified requiring immediate resolution before professional use.`}</span></div>`;
+  if (med > 0) recsHTML += `<div class="rec-item"><span class="rec-icon">🟡</span><span>${isAr ? `${med} مخاطر متوسطة تستوجب سياسات داخلية واضحة وبروتوكولات مراجعة.` : `${med} medium-risk issue(s) requiring clear internal policies and review protocols.`}</span></div>`;
+  recsHTML += `<div class="rec-item"><span class="rec-icon">📋</span><span>${isAr ? 'وثّق هذا التقييم ضمن سياسة الاستخدام الداخلية وراجعه دورياً.' : 'Document this assessment in your internal usage policy and review it periodically.'}</span></div>`;
+  recsHTML += `<div class="rec-item"><span class="rec-icon">👥</span><span>${isAr ? 'تأكد من تدريب جميع المستخدمين على حدود الأداة ومخاطرها قبل الاعتماد عليها.' : 'Ensure all users are trained on tool limitations and risks before reliance.'}</span></div>`;
+
+  recEl.innerHTML = recsHTML;
+}
+
+// ── RESET ──
+function resetTool() {
+  document.querySelectorAll('.check-item').forEach(i => i.classList.remove('checked'));
+  document.querySelectorAll('.usecase-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('btn-next1').disabled = true;
+  document.getElementById('progress-fill').style.width = '0%';
+  goPanel(1);
+}
+
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
