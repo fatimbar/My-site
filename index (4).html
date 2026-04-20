@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HS5FM922XT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HS5FM922XT');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الذكاآلي القانوني | أداة تقييم مخاطر الذكاء الاصطناعي في الممارسة القانونية</title>
+<meta name="description" content="أداة تفاعلية لتقييم المخاطر القانونية والأخلاقية لاستخدام الذكاء الاصطناعي في البيئة القانونية — بواسطة فاطمة برناوي">
+<meta property="og:title" content="الذكاآلي القانوني | Legal AI Risk Assessment Tool">
+<meta property="og:description" content="أداة تفاعلية لتقييم مخاطر استخدام الذكاء الاصطناعي في الممارسة القانونية — An interactive tool for assessing AI risks in legal practice">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0f0e0c; --paper:#f5f0e8; --paper-dark:#ede7d9;
+  --gold:#b8860b; --gold-light:#d4a843; --slate:#2c3e50;
+  --muted:#7a7060; --line:rgba(15,14,12,0.12);
+  --serif-ar:'Noto Naskh Arabic',serif; --serif-en:'Playfair Display',serif; --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:19px}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif-ar);line-height:1.8;overflow-x:hidden}
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:8px 40px;background:var(--ink);border-bottom:1px solid var(--gold)}
+.lang-bar-brand{display:flex;align-items:center;gap:12px}
+.lang-bar .logo-img{height:38px;width:38px;object-fit:contain;border-radius:50%;opacity:.92;transition:opacity .2s}
+.lang-bar .logo-img:hover{opacity:1}
+.lang-bar .wordmark{font-family:var(--mono);font-size:22px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:600}
+.lang-toggle{display:flex;gap:6px}
+.lang-btn{background:none;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.5);font-family:var(--mono);font-size:11px;padding:4px 12px;cursor:pointer;letter-spacing:2px;transition:all .2s}
+.lang-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(184,134,11,0.1)}
+.lang-btn:hover{color:var(--gold-light);border-color:var(--gold-light)}
+nav{position:fixed;top:41px;left:0;right:0;z-index:99;display:flex;justify-content:center;gap:40px;padding:14px 40px;background:rgba(245,240,232,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav a{text-decoration:none;color:var(--muted);font-size:15px;letter-spacing:1px;font-family:var(--mono);transition:color .2s;position:relative}
+nav a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .2s}
+nav a:hover{color:var(--ink)}
+nav a:hover::after{transform:scaleX(1)}
+#hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding-top:90px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 60%,rgba(184,134,11,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 80% 30%,rgba(139,58,42,.04) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;opacity:.03;background-image:linear-gradient(var(--ink) 1px,transparent 1px),linear-gradient(90deg,var(--ink) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{display:flex;flex-direction:column;justify-content:center;padding:80px 10vw;position:relative;z-index:2}
+.hero-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.hero-eyebrow span{font-family:var(--mono);font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
+.eyebrow-line{height:1px;width:60px;background:var(--gold)}
+.hero-name{font-family:var(--serif-ar);font-size:clamp(2.8rem,6vw,5rem);font-weight:700;line-height:1.15;color:var(--ink);margin-bottom:8px}
+.hero-name .en{font-family:var(--serif-en);font-style:italic;font-size:clamp(1.6rem,3vw,2.8rem);color:var(--muted);font-weight:400;display:block;margin-top:6px}
+.hero-title{margin:28px 0;font-size:1.05rem;color:var(--muted);max-width:580px;line-height:2}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:48px}
+.tag{font-family:var(--mono);font-size:11px;padding:6px 16px;border:1px solid var(--line);color:var(--slate);letter-spacing:1px;background:rgba(255,255,255,.5);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.tag:hover{border-color:var(--gold);color:var(--gold)}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--ink);color:var(--paper);border:none;padding:14px 32px;font-family:var(--mono);font-size:12px;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-primary:hover{background:var(--gold)}
+.btn-outline{background:none;color:var(--ink);border:1px solid var(--ink);padding:14px 32px;font-family:var(--mono);font-size:12px;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-scroll{padding:32px 10vw;display:flex;align-items:center;gap:16px;border-top:1px solid var(--line);position:relative;z-index:2}
+.scroll-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--muted)}
+.scroll-line{height:1px;flex:1;background:var(--line)}
+.scroll-arrow{width:32px;height:32px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+section{padding:100px 10vw;position:relative}
+section:nth-child(even){background:var(--paper-dark)}
+.section-label{display:flex;align-items:center;gap:16px;margin-bottom:48px}
+.section-label span{font-family:var(--mono);font-size:45px;letter-spacing:4px;color:var(--gold)}
+.section-label::after{content:'';flex:1;height:1px;background:var(--line)}
+.section-title{font-size:clamp(2rem,3.5vw,2.9rem);font-weight:700;line-height:1.3;margin-bottom:24px;color:var(--ink)}
+.about-text p{color:var(--muted);margin-bottom:20px;font-size:1.05rem}
+.cv-highlights{margin-top:40px;border-top:1px solid var(--line);padding-top:32px}
+.cv-item{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}
+.cv-year{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1px;padding-top:4px}
+.cv-desc{font-size:.95rem}
+.cv-desc strong{display:block;margin-bottom:4px}
+.cv-desc small{color:var(--muted);font-size:.85rem}
+#methodology .method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:48px}
+.method-card{background:var(--paper);padding:40px 32px;transition:background .2s}
+.method-card:hover{background:#fff}
+.method-num{font-family:var(--mono);font-size:48px;color:rgba(184,134,11,.15);font-weight:500;line-height:1;margin-bottom:20px}
+.method-title{font-size:1.1rem;font-weight:600;margin-bottom:12px;color:var(--ink)}
+.method-text{color:var(--muted);font-size:.95rem;line-height:1.9}
+.methodology-more{margin-top:40px;display:flex;justify-content:flex-end}
+.btn-more{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold);text-decoration:none;border:1px solid var(--gold);padding:10px 24px;transition:all .2s;display:inline-block}
+.btn-more:hover{background:var(--gold);color:var(--ink)}
+#tool{background:#1a1a1a !important;color:var(--paper)}
+#tool .section-label span{color:var(--gold-light)}
+#tool .section-label::after{background:rgba(255,255,255,.1)}
+#tool .section-title{color:var(--paper);font-size:clamp(2.2rem,4vw,3.2rem)}
+.tool-intro{color:rgba(245,240,232,.65);margin-bottom:48px;max-width:640px;font-size:1.05rem}
+.tool-steps{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
+.step-indicator{display:flex;align-items:center;gap:8px}
+.step-dot{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.3);transition:all .3s}
+.step-dot.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:700}
+.step-dot.done{background:rgba(184,134,11,.3);border-color:var(--gold);color:var(--gold)}
+.step-connector{height:1px;width:30px;background:rgba(255,255,255,.15)}
+.tool-panel{display:none;animation:fadeIn .4s ease}
+.tool-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.panel-title{font-size:1.3rem;font-weight:600;margin-bottom:8px;color:var(--paper)}
+.panel-subtitle{color:rgba(245,240,232,.5);font-size:.9rem;margin-bottom:32px;font-family:var(--mono);letter-spacing:1px}
+.usecase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.usecase-card{border:1px solid rgba(255,255,255,.12);padding:20px;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.usecase-card:hover{border-color:var(--gold);background:rgba(184,134,11,.08)}
+.usecase-card.selected{border-color:var(--gold);background:rgba(184,134,11,.15)}
+.usecase-icon{font-size:24px;margin-bottom:10px}
+.usecase-name{font-size:.95rem;font-weight:600}
+.usecase-desc{font-size:.8rem;color:rgba(245,240,232,.5);margin-top:4px;font-family:var(--mono)}
+.context-alert{display:none;background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.3);border-right:3px solid var(--gold);padding:16px 20px;margin-bottom:32px;font-size:.88rem;color:rgba(245,240,232,.85);line-height:1.8;animation:fadeIn .3s ease}
+body.en .context-alert{border-right:1px solid rgba(184,134,11,.3);border-left:3px solid var(--gold)}
+.context-alert.visible{display:block}
+.question-group{margin-bottom:36px}
+.question-group-title{font-family:var(--mono);font-size:14px;letter-spacing:3px;color:var(--gold);margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid rgba(184,134,11,.3)}
+.question-item{padding:24px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.question-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:4px}
+.question-code{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1px;flex-shrink:0;padding-top:3px}
+.question-text{font-size:1rem;line-height:1.9;font-weight:600}
+.question-why{font-size:.88rem;color:rgba(245,240,232,.45);font-family:var(--mono);margin-bottom:16px;line-height:1.7;padding-right:12px;border-right:2px solid rgba(184,134,11,.2)}
+body.en .question-why{border-right:none;border-left:2px solid rgba(184,134,11,.2);padding-right:0;padding-left:12px}
+.radio-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.radio-option{border:1px solid rgba(255,255,255,.1);padding:12px 16px;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02);display:flex;align-items:flex-start;gap:10px}
+.radio-option:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.05)}
+.radio-option.sel-0{border-color:#27ae60;background:rgba(39,174,96,.1)}
+.radio-option.sel-1{border-color:#d4a843;background:rgba(212,168,67,.1)}
+.radio-option.sel-2{border-color:#c0392b;background:rgba(192,57,43,.1)}
+.radio-dot{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.radio-option.sel-0 .radio-dot{border-color:#27ae60;background:#27ae60}
+.radio-option.sel-1 .radio-dot{border-color:#d4a843;background:#d4a843}
+.radio-option.sel-2 .radio-dot{border-color:#c0392b;background:#c0392b}
+.radio-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;opacity:0;transition:opacity .15s}
+.radio-option[class*="sel-"] .radio-dot::after{opacity:1}
+.radio-label{flex:1;font-size:.9rem;color:rgba(245,240,232,.65);line-height:1.6}
+.radio-option[class*="sel-"] .radio-label{color:rgba(245,240,232,.95)}
+.radio-color{font-size:10px;margin-bottom:2px}
+.progress-bar-wrap{background:rgba(255,255,255,.08);height:4px;margin-bottom:40px}
+.progress-bar-fill{height:100%;background:var(--gold);transition:width .4s ease;width:0%}
+/* Sticky scroll progress bar */
+.scroll-progress-bar{position:fixed;top:41px;left:0;right:0;z-index:98;height:4px;background:rgba(255,255,255,.08);display:none;pointer-events:none}
+.scroll-progress-bar.visible{display:block}
+.scroll-progress-fill{height:100%;background:var(--gold);transition:width .15s ease;width:0%}
+.scroll-progress-label{position:fixed;top:46px;right:40px;z-index:98;font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:1px;display:none;pointer-events:none;background:rgba(26,26,26,.9);padding:2px 8px}
+body.en .scroll-progress-label{right:auto;left:40px}
+.scroll-progress-label.visible{display:block}
+/* Partial result notice */
+.partial-notice{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);padding:16px 20px;margin-bottom:24px;font-size:.88rem;line-height:1.8;text-align:center}
+.partial-notice .partial-icon{font-size:20px;margin-bottom:6px}
+.partial-notice .partial-text{color:rgba(245,240,232,.75)}
+.partial-notice .partial-cta{color:var(--gold);font-family:var(--mono);font-size:11px;letter-spacing:1px;margin-top:6px;cursor:pointer;background:none;border:none;transition:opacity .2s}
+.partial-notice .partial-cta:hover{opacity:.7}
+.result-dual{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px}
+.result-card{border:1px solid rgba(255,255,255,.1);padding:32px 28px}
+.result-card-title{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:20px}
+.result-score-pct{font-family:var(--mono);font-size:2.4rem;font-weight:500;color:var(--paper);margin-bottom:4px}
+.result-score-sub{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:rgba(245,240,232,.4)}
+.result-level{margin-top:16px}
+.result-card-note{color:rgba(245,240,232,.4);font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:8px}
+.level-badge{font-family:var(--mono);font-size:11px;letter-spacing:2px;padding:6px 14px;font-weight:700;display:inline-block}
+.level-low{background:rgba(39,174,96,.15);color:#2ecc71;border:1px solid #27ae60}
+.level-med{background:rgba(212,168,67,.15);color:#d4a843;border:1px solid #d4a843}
+.level-high{background:rgba(230,126,34,.15);color:#e67e22;border:1px solid #e67e22}
+.level-critical{background:rgba(192,57,43,.15);color:#e74c3c;border:1px solid #c0392b}
+.top3-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:28px 32px;margin-bottom:24px}
+.top3-title{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--gold);margin-bottom:20px}
+.top3-item{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:flex-start}
+.top3-item:last-child{border-bottom:none}
+.top3-content{flex:1}
+.top3-name{font-size:.9rem;font-weight:600;margin-bottom:4px}
+.top3-rec{font-size:.9rem;color:rgba(245,240,232,.55);line-height:1.7}
+.usecase-rec{background:rgba(184,134,11,.06);border:1px solid rgba(184,134,11,.2);padding:24px 28px;margin-bottom:24px}
+.usecase-rec-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:10px}
+.usecase-rec p{font-size:.88rem;color:rgba(245,240,232,.75);line-height:1.9}
+.tool-disclaimer{margin-top:24px;padding:16px 20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);font-size:.82rem;color:rgba(245,240,232,.45);font-family:var(--mono);letter-spacing:.5px;line-height:1.8}
+.tool-nav{display:flex;gap:12px;margin-top:32px;justify-content:flex-end}
+.btn-ghost{background:none;color:rgba(245,240,232,.5);border:1px solid rgba(255,255,255,.15);padding:12px 28px;font-family:var(--mono);font-size:11px;letter-spacing:2px;cursor:pointer;transition:all .2s}
+.btn-ghost:hover{color:var(--paper);border-color:rgba(255,255,255,.4)}
+.btn-gold{background:var(--gold);color:var(--ink);border:none;padding:12px 28px;font-family:var(--mono);font-size:11px;letter-spacing:2px;cursor:pointer;font-weight:600;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-gold:disabled{opacity:.4;cursor:not-allowed}
+#articles{background:var(--paper-dark)}
+.articles-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filter-btn{font-family:var(--mono);font-size:11px;padding:7px 18px;letter-spacing:2px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer;transition:all .2s}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(184,134,11,.08)}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.article-card{background:var(--paper);padding:40px 32px;transition:background .2s}
+.article-card:hover{background:#fff}
+.article-card.hidden{display:none}
+.article-tag{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:16px;display:inline-block}
+.article-title{font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:12px;line-height:1.5}
+.article-meta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.article-read-more{color:var(--gold);font-size:11px;font-family:var(--mono)}
+#contact{text-align:center}
+#contact .section-label{justify-content:center}
+#contact .section-label::after{display:none}
+.contact-text{color:var(--muted);max-width:560px;margin:0 auto 48px;font-size:1.05rem}
+.contact-services{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:48px;text-align:right}
+body.en .contact-services{text-align:left}
+.contact-service-card{background:var(--paper);padding:36px 32px;transition:background .2s}
+.contact-service-card:hover{background:#fff}
+.contact-service-icon{font-size:28px;margin-bottom:18px;opacity:.7}
+.contact-service-title{font-size:1.1rem;font-weight:700;margin-bottom:10px}
+.contact-service-desc{color:var(--muted);font-size:.95rem;line-height:1.9;margin-bottom:18px}
+.contact-service-items{list-style:none;border-top:1px solid var(--line);padding-top:16px}
+.contact-service-items li{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px;padding:5px 0;display:flex;align-items:center;gap:8px}
+.contact-service-items li::before{content:'→';color:var(--gold)}
+.contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.contact-link{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:14px 28px;text-decoration:none;color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:2px;transition:all .2s}
+.contact-link:hover{border-color:var(--gold);color:var(--gold)}
+footer{background:var(--ink);padding:40px 10vw;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-family:var(--mono);font-size:11px;color:rgba(245,240,232,.3);letter-spacing:1px}
+.footer-mark{font-family:var(--serif-en);font-style:italic;color:var(--gold);font-size:16px}
+/* ── ABOUT LOGO ── */
+.about-logo-wrap{display:flex;justify-content:center;margin-bottom:40px}
+.about-logo{width:300px;height:300px;object-fit:contain;opacity:.9;filter:drop-shadow(0 4px 24px rgba(184,134,11,.15))}
+/* ── ARTICLE EXCERPT TRUNCATION ── */
+.article-excerpt{color:var(--muted);font-size:.9rem;line-height:1.9;margin-bottom:20px}
+.article-read-more{color:var(--gold);font-size:11px;font-family:var(--mono);cursor:pointer;background:none;border:none;padding:0;transition:opacity .2s}
+.article-read-more:hover{opacity:.7}
+
+/* ── ARTICLE MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(15,14,12,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--paper);max-width:760px;width:90vw;max-height:85vh;overflow-y:auto;padding:48px 48px 40px;position:relative;border-top:3px solid var(--gold)}
+.modal-close{position:absolute;top:16px;left:16px;background:none;border:none;font-family:var(--mono);font-size:13px;color:var(--muted);cursor:pointer;letter-spacing:1px;transition:color .2s}
+body.en .modal-close{left:auto;right:16px}
+.modal-close:hover{color:var(--gold)}
+.modal-tag{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:12px;display:block}
+.modal-title{font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:20px;line-height:1.5}
+.modal-body{color:var(--muted);font-size:.95rem;line-height:2;white-space:pre-line}
+.modal-body a{color:var(--gold);word-break:break-all}
+.modal-meta{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;padding-top:20px;margin-top:20px;border-top:1px solid var(--line)}
+
+/* ── BACK TO TOP ── */
+.back-to-top{position:fixed;bottom:32px;left:32px;z-index:200;width:40px;height:40px;background:var(--ink);border:1px solid var(--gold);color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+body.en .back-to-top{left:auto;right:32px}
+.back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
+.back-to-top:hover{background:var(--gold);color:var(--ink)}
+
+/* ── HAMBURGER ── */
+.hamburger{display:none;background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:6px 10px;cursor:pointer;font-size:16px;position:fixed;top:10px;right:16px;z-index:101}
+body.en .hamburger{right:auto;left:16px}
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:98;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{text-decoration:none;color:var(--paper);font-family:var(--mono);font-size:16px;letter-spacing:3px;transition:color .2s}
+.mobile-nav a:hover{color:var(--gold)}
+.mobile-nav-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer}
+
+/* ── HOVER on article cards stronger ── */
+.article-card{background:var(--paper);padding:40px 32px;transition:background .25s,transform .25s,box-shadow .25s;cursor:pointer}
+.article-card:hover{background:#fff;transform:translateY(-3px);box-shadow:0 8px 32px rgba(184,134,11,.12)}
+
+@media(max-width:900px){
+  nav{gap:16px;padding:12px 20px;flex-wrap:wrap}
+  section{padding:70px 6vw}
+  #methodology .method-grid{grid-template-columns:1fr}
+  .articles-grid{grid-template-columns:1fr}
+  .result-dual{grid-template-columns:1fr}
+  .radio-options{grid-template-columns:1fr}
+  .contact-services{grid-template-columns:1fr}
+  .hero-content{padding:60px 6vw}
+}
+@media(max-width:600px){
+  html{font-size:16px}
+  .lang-bar{padding:8px 16px}
+  .lang-bar .wordmark{font-size:16px}
+  .hero-content{padding:48px 5vw}
+  nav{display:none}
+  .hamburger{display:block}
+  section{padding:56px 5vw}
+  .modal-box{padding:32px 20px 28px}
+  .about-logo{width:110px;height:110px}
+}
+body.en{direction:ltr;font-family:var(--serif-en)}
+body.en .ar{display:none}
+body.en .en-text{display:block !important}
+body.ar .ar{display:block}
+body.ar .en-text{display:none !important}
+.en-text{display:none;font-family:var(--serif-en)}
+</style>
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HS5FM922XT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HS5FM922XT');
+</script>
+<body class="ar">
+
+<div class="lang-bar">
+  <div class="lang-bar-brand">
+    <span class="wordmark">الذكاآلي القانوني</span>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ar')">AR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<button class="hamburger" onclick="toggleMobileNav()" aria-label="القائمة">☰</button>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+  <a href="#tool" onclick="toggleMobileNav()" class="ar">أداة التقييم</a>
+  <a href="#tool" onclick="toggleMobileNav()" class="en-text">Risk Tool</a>
+  <a href="#methodology" onclick="toggleMobileNav()" class="ar">المنهجية</a>
+  <a href="#methodology" onclick="toggleMobileNav()" class="en-text">Methodology</a>
+  <a href="#articles" onclick="toggleMobileNav()" class="ar">المقالات</a>
+  <a href="#articles" onclick="toggleMobileNav()" class="en-text">Articles</a>
+  <a href="#about" onclick="toggleMobileNav()" class="ar">عني</a>
+  <a href="#about" onclick="toggleMobileNav()" class="en-text">About</a>
+  <a href="#contact" onclick="toggleMobileNav()" class="ar">التواصل</a>
+  <a href="#contact" onclick="toggleMobileNav()" class="en-text">Contact</a>
+</div>
+
+<nav>
+  <a href="#tool" class="ar">أداة التقييم</a><a href="#tool" class="en-text">Risk Tool</a>
+  <a href="#methodology" class="ar">المنهجية</a><a href="#methodology" class="en-text">Methodology</a>
+  <a href="#articles" class="ar">المقالات</a><a href="#articles" class="en-text">Articles</a>
+  <a href="#about" class="ar">عني</a><a href="#about" class="en-text">About</a>
+  <a href="#contact" class="ar">التواصل</a><a href="#contact" class="en-text">Contact</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="ar">أداة تقييم مخاطر · الذكاء الاصطناعي · القانون</span>
+      <span class="en-text">AI Risk Assessment · Legal Practice · Ethics</span>
+    </div>
+    <h1 class="hero-name">
+      <span class="ar">الذكاآلي القانوني</span>
+      <span class="en-text">Al-Thaka'ali Al-Qanouni</span>
+    </h1>
+    <p class="hero-title ar">أداة تفاعلية موجّهة للممارسين القانونيين لتقييم المخاطر القانونية والأخلاقية لأي أداة ذكاء اصطناعي — قبل الاعتماد عليها في العمل الفعلي.</p>
+    <p class="hero-title en-text" style="font-family:var(--serif-en)">An interactive tool for legal practitioners to assess the legal and ethical risks of any AI tool — before relying on it in actual work.</p>
+    <p style="font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--muted);margin-bottom:32px">
+      <span class="ar">بواسطة فاطمة برناوي — باحثة في تقاطع القانون والذكاء الاصطناعي</span>
+      <span class="en-text">By Fatimah Barnawi — Researcher at the intersection of Law & AI</span>
+    </p>
+    <div class="hero-tags">
+      <a href="#articles" class="tag ar" onclick="filterArticles('ai-law')">قانون الذكاء الاصطناعي</a>
+      <a href="#articles" class="tag en-text" onclick="filterArticles('ai-law')">AI Law</a>
+      <a href="#articles" class="tag ar" onclick="filterArticles('ethics')">أخلاقيات التقنية</a>
+      <a href="#articles" class="tag en-text" onclick="filterArticles('ethics')">Tech Ethics</a>
+      <a href="#articles" class="tag ar" onclick="filterArticles('data')">تنظيم البيانات</a>
+      <a href="#articles" class="tag en-text" onclick="filterArticles('data')">Data Regulation</a>
+    </div>
+    <div class="hero-cta">
+      <a href="#tool" class="btn-primary ar">ابدأ التقييم الآن</a>
+      <a href="#tool" class="btn-primary en-text">Start Assessment Now</a>
+      <a href="#about" class="btn-outline ar">عن الباحثة</a>
+      <a href="#about" class="btn-outline en-text">About the Researcher</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-label ar">اكتشف</span>
+    <span class="scroll-label en-text">SCROLL</span>
+    <div class="scroll-line"></div>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+
+<section id="tool">
+  <div class="section-label"><span class="ar">01 — أداة التقييم</span><span class="en-text">01 — RISK TOOL</span></div>
+  <h2 class="section-title ar">مقيّم المخاطر القانونية والأخلاقية لاستخدام AI</h2>
+  <h2 class="section-title en-text">Legal & Ethical AI Risk Assessment Tool</h2>
+  <p class="tool-intro ar">أداة تفاعلية موجّهة للممارسين القانونيين لتقييم مدى جاهزية أي أداة ذكاء اصطناعي للاستخدام في بيئتهم المهنية — قبل الاعتماد عليها في العمل الفعلي.</p>
+  <p class="tool-intro en-text" style="display:none">An interactive tool for legal practitioners to assess the readiness of any AI tool for use in their professional environment — before relying on it in actual work.</p>
+
+  <div class="tool-steps">
+    <div class="step-indicator"><div class="step-dot active" id="dot1">1</div></div>
+    <div class="step-connector"></div>
+    <div class="step-indicator"><div class="step-dot" id="dot2">2</div></div>
+    <div class="step-connector"></div>
+    <div class="step-indicator"><div class="step-dot" id="dot3">✓</div></div>
+  </div>
+
+  <!-- PANEL 1 -->
+  <div class="tool-panel active" id="panel1">
+    <p class="panel-title ar">ما حالة الاستخدام؟</p>
+    <p class="panel-title en-text">What is the use case?</p>
+    <p class="panel-subtitle ar">اختر نوع العمل القانوني الذي تنوي فيه استخدام الأداة</p>
+    <p class="panel-subtitle en-text">SELECT THE LEGAL WORK TYPE WHERE YOU PLAN TO USE THE TOOL</p>
+    <div class="usecase-grid">
+      <div class="usecase-card" data-case="contract" onclick="selectCase(this)">
+        <div class="usecase-icon">📄</div>
+        <div class="usecase-name ar">صياغة العقود</div><div class="usecase-name en-text">Contract Drafting</div>
+        <div class="usecase-desc ar">إعداد ومراجعة العقود</div><div class="usecase-desc en-text">Drafting & reviewing contracts</div>
+      </div>
+      <div class="usecase-card" data-case="research" onclick="selectCase(this)">
+        <div class="usecase-icon">🔍</div>
+        <div class="usecase-name ar">البحث القانوني</div><div class="usecase-name en-text">Legal Research</div>
+        <div class="usecase-desc ar">تحليل السوابق والتشريعات</div><div class="usecase-desc en-text">Case law & legislation analysis</div>
+      </div>
+      <div class="usecase-card" data-case="litigation" onclick="selectCase(this)">
+        <div class="usecase-icon">⚖️</div>
+        <div class="usecase-name ar">التقاضي</div><div class="usecase-name en-text">Litigation</div>
+        <div class="usecase-desc ar">إعداد المذكرات والحجج</div><div class="usecase-desc en-text">Briefs & legal arguments</div>
+      </div>
+      <div class="usecase-card" data-case="compliance" onclick="selectCase(this)">
+        <div class="usecase-icon">🛡️</div>
+        <div class="usecase-name ar">الامتثال التنظيمي</div><div class="usecase-name en-text">Regulatory Compliance</div>
+        <div class="usecase-desc ar">مراجعة الالتزام التنظيمي</div><div class="usecase-desc en-text">Regulatory compliance review</div>
+      </div>
+      <div class="usecase-card" data-case="due-diligence" onclick="selectCase(this)">
+        <div class="usecase-icon">🔬</div>
+        <div class="usecase-name ar">الفحص القانوني</div><div class="usecase-name en-text">Due Diligence</div>
+        <div class="usecase-desc ar">تدقيق الوثائق والملفات</div><div class="usecase-desc en-text">Document & file review</div>
+      </div>
+      <div class="usecase-card" data-case="academic" onclick="selectCase(this)">
+        <div class="usecase-icon">📚</div>
+        <div class="usecase-name ar">البحث الأكاديمي القانوني</div><div class="usecase-name en-text">Academic Legal Research</div>
+        <div class="usecase-desc ar">بحث أكاديمي ودراسات قانونية</div><div class="usecase-desc en-text">Academic research & legal studies</div>
+      </div>
+    </div>
+    <div class="context-alert" id="contextAlert"><span id="contextAlertText"></span></div>
+    <div class="tool-nav">
+      <button class="btn-gold" id="btn-next1" onclick="goPanel(2)" disabled>
+        <span class="ar">التالي ←</span><span class="en-text">Next →</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL 2 -->
+  <div class="tool-panel" id="panel2">
+    <p class="panel-title ar">تقييم المخاطر</p>
+    <p class="panel-title en-text">Risk Assessment</p>
+    <p class="panel-subtitle ar">أجب عن كل سؤال بصدق — الهدف فهم مدى جاهزيتك، لا اختبارك</p>
+    <p class="panel-subtitle en-text">ANSWER EACH QUESTION HONESTLY — THE GOAL IS TO UNDERSTAND YOUR READINESS</p>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill"></div></div>
+
+    <!-- أ -->
+    <div class="question-group">
+      <div class="question-group-title ar">أ — سرية البيانات والخصوصية</div>
+      <div class="question-group-title en-text">A — DATA CONFIDENTIALITY & PRIVACY</div>
+
+      <div class="question-item" data-q="a1">
+        <div class="question-header"><span class="question-code ar">أ١</span><div class="question-text ar">أين تذهب البيانات عند استخدام الأداة؟</div></div>
+        <div class="question-header"><span class="question-code en-text">A1</span><div class="question-text en-text">Where does your data go when using the tool?</div></div>
+        <p class="question-why ar">بعض الأدوات ترسل كل ما تكتبه إلى خوادم خارجية. إذا كانت مدخلاتك تحتوي على بيانات موكّل فأنت قد تكون نقلت معلومات سرية دون علمك أو موافقة موكّلك.</p>
+        <p class="question-why en-text">Some tools send everything you type to external servers. If inputs contain client data, you may have transferred confidential information without your knowledge or client's consent.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'a1',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">الأداة تعالج البيانات محلياً ولا ترسلها لأي خادم خارجي</span><span class="en-text">Tool processes data locally — no external servers</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a1',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">البيانات ترسل لخوادم خارجية لكن بسياسة خصوصية واضحة</span><span class="en-text">Sent to external servers but with a clear privacy policy</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a1',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">البيانات ترسل لخوادم خارجية ولا أعرف ماذا يحدث بها</span><span class="en-text">Sent to external servers and I don't know what happens to it</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a1',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">لم أتحقق من هذا الأمر بعد</span><span class="en-text">I haven't checked this yet</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="a2">
+        <div class="question-header"><span class="question-code ar">أ٢</span><div class="question-text ar">هل تُستخدم مدخلاتك لتدريب النموذج؟</div></div>
+        <div class="question-header"><span class="question-code en-text">A2</span><div class="question-text en-text">Are your inputs used to train the model?</div></div>
+        <p class="question-why ar">بعض الأدوات تستخدم مدخلاتك لتحسين نموذجها — محتوى قضاياك قد يصبح جزءاً من تدريب الأداة.</p>
+        <p class="question-why en-text">Some tools use your inputs to improve their model — your case content could become part of training data.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'a2',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">لا تستخدم المدخلات للتدريب — مكتوب صراحةً في سياستها</span><span class="en-text">Doesn't use inputs for training — explicitly stated in policy</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a2',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">لا تستخدمها للتدريب لكن السياسة غير واضحة تماماً</span><span class="en-text">Doesn't use them but the policy isn't entirely clear</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a2',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">قد تستخدم المدخلات للتدريب</span><span class="en-text">May use inputs for training</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a2',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">لم أقرأ سياسة الخصوصية بعد</span><span class="en-text">I haven't read the privacy policy yet</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="a3">
+        <div class="question-header"><span class="question-code ar">أ٣</span><div class="question-text ar">في أي دولة تقع خوادم الأداة؟</div></div>
+        <div class="question-header"><span class="question-code en-text">A3</span><div class="question-text en-text">In which country are the tool's servers located?</div></div>
+        <p class="question-why ar">بيانات موكّلك في دولة أجنبية قد تخضع لقوانين تلك الدولة، بما فيها طلبات الاطلاع الحكومية.</p>
+        <p class="question-why en-text">Client data stored abroad may be subject to that country's laws, including government access requests.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'a3',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">دولة ذات قوانين حماية بيانات قوية وأعرف ذلك بالتحديد</span><span class="en-text">Country with strong data protection laws — I know this specifically</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a3',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">دولة معروفة لكن لم أتحقق من قوانين حماية البيانات فيها</span><span class="en-text">Known country but I haven't verified its data protection laws</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a3',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لا أعرف في أي دولة تقع الخوادم</span><span class="en-text">I don't know which country the servers are in</span></div></div>
+        </div>
+      </div>
+
+
+      <div class="question-item" data-q="a5">
+        <div class="question-header"><span class="question-code ar">أ٤</span><div class="question-text ar">هل تُجهّل بيانات الموكّل قبل إدخالها للأداة؟</div></div>
+        <div class="question-header"><span class="question-code en-text">A4</span><div class="question-text en-text">Do you anonymize client data before entering it into the tool?</div></div>
+        <p class="question-why ar">استبدال الأسماء والتفاصيل الشخصية بمعرّفات مجهولة يقلّص خطر التعرّف على الموكّل حتى لو اطّلع طرف ثالث على المدخلات.</p>
+        <p class="question-why en-text">Replacing names and personal details with anonymous identifiers reduces the risk of client identification even if a third party views the inputs.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'a5',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">دائماً — بروتوكول ثابت للتجهيل قبل أي إدخال</span><span class="en-text">Always — consistent anonymization protocol before any input</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a5',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً — البيانات الحساسة فقط وليس بشكل منهجي</span><span class="en-text">Sometimes — sensitive data only, not systematically</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'a5',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">نادراً أو لم نفكر في هذا الأمر</span><span class="en-text">Rarely or we haven't thought about this</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ب -->
+    <div class="question-group">
+      <div class="question-group-title ar">ب — دقة المخرجات والموثوقية</div>
+      <div class="question-group-title en-text">B — OUTPUT ACCURACY & RELIABILITY</div>
+
+      <div class="question-item" data-q="b1">
+        <div class="question-header"><span class="question-code ar">ب١</span><div class="question-text ar">هل تُنبّهك الأداة عندما لا تكون متأكدة من إجابتها؟</div></div>
+        <div class="question-header"><span class="question-code en-text">B1</span><div class="question-text en-text">Does the tool alert you when uncertain about its answer?</div></div>
+        <p class="question-why ar">النماذج اللغوية تُنتج نصاً واثقاً سواء كانت مخطئة أم مصيبة. الأداة التي لا تُشير لمستوى ثقتها تجعل اكتشاف الأخطاء مسؤوليتك وحدك.</p>
+        <p class="question-why en-text">Language models produce confident text whether right or wrong. A tool that doesn't flag uncertainty makes error detection entirely your responsibility.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'b1',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">نعم، تُشير صراحةً لعدم اليقين وتُوصي بالتحقق</span><span class="en-text">Yes, explicitly flags uncertainty and recommends verification</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b1',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً، لكن ليس بشكل منتظم</span><span class="en-text">Sometimes, but not consistently</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b1',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لا، تُقدّم إجاباتها بأسلوب واثق دائماً</span><span class="en-text">No, always presents answers with the same confident style</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="b2">
+        <div class="question-header"><span class="question-code ar">ب٢</span><div class="question-text ar">هل تعرض الأداة المصادر التي استندت إليها؟</div></div>
+        <div class="question-header"><span class="question-code en-text">B2</span><div class="question-text en-text">Does the tool show the sources it relied on?</div></div>
+        <p class="question-why ar">بدون مصادر قابلة للتحقق لا يمكنك معرفة إذا كانت المعلومة حقيقية أم ملفّقة. محامون واجهوا إشكاليات مهنية بسبب الاستشهاد بأحكام لم تكن موجودة أصلاً.</p>
+        <p class="question-why en-text">Without verifiable sources you can't know if information is real or fabricated. Lawyers worldwide have faced professional issues for citing rulings that never existed.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'b2',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">نعم، مراجع دقيقة قابلة للتحقق مباشرةً</span><span class="en-text">Yes, precise references that can be verified directly</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b2',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">تعرض مراجع لكنها أحياناً عامة أو غير دقيقة</span><span class="en-text">Shows references but sometimes general or imprecise</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b2',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لا تعرض مصادر أو تعرض مصادر لا يمكن التحقق منها</span><span class="en-text">Doesn't show sources, or shows unverifiable sources</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="b3">
+        <div class="question-header"><span class="question-code ar">ب٣</span><div class="question-text ar">عند إدخال مسألة قانونية، هل تعرف الإجابة الصحيحة مسبقاً؟</div></div>
+        <div class="question-header"><span class="question-code en-text">B3</span><div class="question-text en-text">When entering a legal question, do you already know the correct answer?</div></div>
+        <p class="question-why ar">إذا كنت تستخدم الأداة فقط في مسائل لا تعرف إجابتها، فأنت لا تملك معياراً للحكم على دقتها — وهذا يجعل اكتشاف الأخطاء أصعب بكثير.</p>
+        <p class="question-why en-text">If you only use the tool on questions you don't know the answer to, you have no benchmark to judge its accuracy — making error detection much harder.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'b3',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">في الغالب أختبرها في مسائل أعرف إجابتها للتحقق من دقتها</span><span class="en-text">I mostly test it on questions I know the answer to</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b3',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً أتحقق، لكن ليس بشكل منهجي</span><span class="en-text">Sometimes I verify, but not systematically</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b3',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">أستخدمها عادةً في مسائل لا أعرف إجابتها مسبقاً</span><span class="en-text">I usually use it on questions I don't know the answer to</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="b4">
+        <div class="question-header"><span class="question-code ar">ب٤</span><div class="question-text ar">ما الذي تفعله بعد الحصول على مخرج من الأداة؟</div></div>
+        <div class="question-header"><span class="question-code en-text">B4</span><div class="question-text en-text">What do you do after receiving an output from the tool?</div></div>
+        <p class="question-why ar">التحقق من المراجع في مصادرها الأصلية هو الحاجز الأخير أمام المعلومة الخاطئة — يحمي موكّلك وسمعتك المهنية.</p>
+        <p class="question-why en-text">Verifying references in original sources is the last barrier against incorrect information — protecting your client and professional reputation.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'b4',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">أتحقق من المراجع في مصادرها الأصلية قبل الاعتماد على أي مخرج</span><span class="en-text">I verify references in original sources before relying on any output</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b4',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أتحقق من بعض المراجع لكن ليس كلها</span><span class="en-text">I verify some references but not all</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'b4',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">أعتمد على المخرج مباشرةً دون تحقق إضافي</span><span class="en-text">I rely on the output directly without additional verification</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ج -->
+    <div class="question-group">
+      <div class="question-group-title ar">ج — هندسة الأوامر</div>
+      <div class="question-group-title en-text">C — PROMPT ENGINEERING</div>
+
+      <div class="question-item" data-q="c1">
+        <div class="question-header"><span class="question-code ar">ج١</span><div class="question-text ar">هل تحدد الولاية القضائية والنظام القانوني وترفق النصوص ذات الصلة؟</div></div>
+        <div class="question-header"><span class="question-code en-text">C1</span><div class="question-text en-text">Do you specify jurisdiction, legal system, and attach relevant texts?</div></div>
+        <p class="question-why ar">الأمر الغامض يُنتج مخرجاً عاماً لا يفيدك. "نظام الشركات السعودي 2022 — المادة كذا" يختلف تماماً عن السؤال العام.</p>
+        <p class="question-why en-text">A vague prompt produces a generic useless output. "Saudi Companies Law 2022 — Article X" is completely different from a general question.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'c1',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">دائماً — أُحدد الولاية والنظام وأُرفق النصوص</span><span class="en-text">Always — specify jurisdiction, system, and attach texts</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'c1',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً — بعض السياق لكن ليس بشكل منهجي</span><span class="en-text">Sometimes — some context but not systematically</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'c1',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">نادراً — سؤال مباشر دون سياق</span><span class="en-text">Rarely — direct question without context</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="c2">
+        <div class="question-header"><span class="question-code ar">ج٢</span><div class="question-text ar">هل تُحدد طبيعة المخرج المطلوب في أمرك؟</div></div>
+        <div class="question-header"><span class="question-code en-text">C2</span><div class="question-text en-text">Do you specify the nature of the required output in your prompt?</div></div>
+        <p class="question-why ar">"تحليل العقد" تعني شيئاً مختلفاً عن "قائمة البنود المخالفة لنظام العمل السعودي مع رقم المادة". كلما كان أدق كان المخرج أكثر قابلية للتحقق.</p>
+        <p class="question-why en-text">"Analyze the contract" is different from "list clauses violating Saudi Labor Law with article numbers." The more precise, the more verifiable the output.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'c2',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">دائماً — نوع المخرج والشكل المطلوب والقيود</span><span class="en-text">Always — output type, required format, and constraints</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'c2',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً — ليس بتفصيل كافٍ دائماً</span><span class="en-text">Sometimes — not always in enough detail</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'c2',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">أكتب طلباً عاماً وأرى ما تُنتجه الأداة</span><span class="en-text">I write a general request and see what the tool produces</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="c3">
+        <div class="question-header"><span class="question-code ar">ج٣</span><div class="question-text ar">عند مواجهة مهمة معقدة، هل تُقسّمها إلى خطوات منفصلة؟</div></div>
+        <div class="question-header"><span class="question-code en-text">C3</span><div class="question-text en-text">When facing a complex task, do you break it into separate steps?</div></div>
+        <p class="question-why ar">النماذج تؤدي أفضل مع المهام المُجزّأة. "ابحث، ثم استخرج المبادئ، ثم طبّق" في جلسات منفصلة أكثر موثوقية من الطلب المدمج.</p>
+        <p class="question-why en-text">Models perform better with broken-down tasks. "Research, then extract principles, then apply" in separate sessions is more reliable than a combined request.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'c3',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">دائماً — أُجزّئ وأتحقق من كل خطوة قبل التالية</span><span class="en-text">Always — I break down and verify each step before the next</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'c3',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً — ليس بشكل منهجي</span><span class="en-text">Sometimes — not systematically</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'c3',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">أُدخل المهمة كاملةً وأنتظر المخرج النهائي</span><span class="en-text">I enter the full task and wait for the final output</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- د -->
+    <div class="question-group">
+      <div class="question-group-title ar">د — الاستقلالية المهنية</div>
+      <div class="question-group-title en-text">D — PROFESSIONAL INDEPENDENCE</div>
+
+      <div class="question-item" data-q="d1">
+        <div class="question-header"><span class="question-code ar">د١</span><div class="question-text ar">كيف تتعامل مع مخرجات الأداة في عملك اليومي؟</div></div>
+        <div class="question-header"><span class="question-code en-text">D1</span><div class="question-text en-text">How do you treat tool outputs in your daily work?</div></div>
+        <p class="question-why ar">«أثر الأتمتة» موثّق بحثياً — البشر يميلون لقبول مخرجات الأنظمة الآلية دون تدقيق. في القانون هذا يُفضي لأخطاء مهنية جسيمة.</p>
+        <p class="question-why en-text">"Automation bias" is documented — people tend to accept automated outputs without scrutiny. In law this leads to serious professional errors.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'d1',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">أتعامل مع كل مخرج كمسوّدة أولى تحتاج مراجعة نقدية كاملة</span><span class="en-text">I treat every output as a first draft requiring full critical review</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'d1',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أراجع المخرجات لكن ربما لا بنفس العمق دائماً</span><span class="en-text">I review outputs but perhaps not always with the same depth</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'d1',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">أجد نفسي أقبل المخرجات مباشرةً إذا بدت منطقية</span><span class="en-text">I find myself accepting outputs directly if they seem logical</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="d2">
+        <div class="question-header"><span class="question-code ar">د٢</span><div class="question-text ar">هل تلقّيت أنت والفريق تدريباً على الاستخدام الآمن لهذه الأدوات؟</div></div>
+        <div class="question-header"><span class="question-code en-text">D2</span><div class="question-text en-text">Have you and your team received training on safe use of these tools?</div></div>
+        <p class="question-why ar">الأداة في يد غير مدرّبة تُنتج مخاطر مضاعفة. يكفي أن يعرف الفريق متى يثق بالمخرج ومتى يراجع.</p>
+        <p class="question-why en-text">A tool in untrained hands multiplies risks. It's enough for the team to know when to trust and when to review.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'d2',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">نعم، أنا والفريق تلقّينا تدريباً واضحاً</span><span class="en-text">Yes, my team and I received clear training</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'d2',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">بعض أفراد الفريق تلقّوا تدريباً، لكن ليس الجميع</span><span class="en-text">Some team members received training, but not everyone</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'d2',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لا، نستخدم الأدوات دون تدريب رسمي</span><span class="en-text">No, we use the tools without formal training</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="d3">
+        <div class="question-header"><span class="question-code ar">د٣</span><div class="question-text ar">هل تُبلّغ موكّليك باستخدام أدوات الذكاء الاصطناعي في عملهم؟</div></div>
+        <div class="question-header"><span class="question-code en-text">D3</span><div class="question-text en-text">Do you inform clients about AI tool use in their matters?</div></div>
+        <p class="question-why ar">بغض النظر عن الإلزام القانوني، الإفصاح للموكّل يبني الثقة ويُوضح حدود مسؤوليتك.</p>
+        <p class="question-why en-text">Regardless of legal obligation, client disclosure builds trust and clarifies the limits of your responsibility.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'d3',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">نعم، نُبلّغ الموكّلين صراحةً</span><span class="en-text">Yes, we explicitly inform clients</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'d3',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أحياناً، تبعاً لطبيعة القضية والموكّل</span><span class="en-text">Sometimes, depending on the case and client</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'d3',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لا، لا نُفصح عن استخدام هذه الأدوات</span><span class="en-text">No, we don't disclose the use of these tools</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- هـ -->
+    <div class="question-group">
+      <div class="question-group-title ar">هـ — الشفافية والتحيز</div>
+      <div class="question-group-title en-text">E — TRANSPARENCY & BIAS</div>
+
+      <div class="question-item" data-q="e1">
+        <div class="question-header"><span class="question-code ar">هـ١</span><div class="question-text ar">عندما تُعطيك الأداة إجابةً، هل تستطيع معرفة كيف وصلت إليها؟</div></div>
+        <div class="question-header"><span class="question-code en-text">E1</span><div class="question-text en-text">When the tool gives you an answer, can you understand how it reached it?</div></div>
+        <p class="question-why ar">الأداة التي لا تشرح استدلالها هي «صندوق أسود». في القانون، الاستدلال نفسه أحياناً أهم من النتيجة.</p>
+        <p class="question-why en-text">A tool that doesn't explain its reasoning is a "black box." In law, the reasoning itself is sometimes more important than the result.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'e1',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">نعم، تشرح الاستدلال وتُشير للمصادر والافتراضات</span><span class="en-text">Yes, explains reasoning and points to sources and assumptions</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'e1',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">تشرح أحياناً، لكن ليس بشكل كامل دائماً</span><span class="en-text">Sometimes explains, but not always fully</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'e1',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لا، تُعطي إجابات مباشرة دون شرح الاستدلال</span><span class="en-text">No, gives direct answers without explaining reasoning</span></div></div>
+        </div>
+      </div>
+
+      <div class="question-item" data-q="e2">
+        <div class="question-header"><span class="question-code ar">هـ٢</span><div class="question-text ar">هل تعلم أن نماذج الذكاء الاصطناعي قد تُنتج نتائج متحيزة تبعاً لبيانات تدريبها؟</div></div>
+        <div class="question-header"><span class="question-code en-text">E2</span><div class="question-text en-text">Are you aware that AI models may produce biased results based on their training data?</div></div>
+        <p class="question-why ar">قد تكون النماذج دُرّبت على نصوص إنجليزية تعكس أنظمة قانونية مختلفة و تقاليد نظرية متنوعة. استخدامها في السياق القانوني السعودي أو العربي دون وعي بهذا قد يُنتج مخرجات لا تنسجم مع روح النظام المحلي.</p>
+        <p class="question-why en-text">Most models were trained on English texts reflecting Western legal systems. Using them in the Saudi or Arab context without awareness of this bias may produce outputs misaligned with local law.</p>
+        <div class="radio-options">
+          <div class="radio-option" onclick="pickRadio(this,'e2',0)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟢</div><span class="ar">نعم، أعرف هذا وأأخذه في الاعتبار عند تقييم كل مخرج</span><span class="en-text">Yes, I know this and factor it in when evaluating every output</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'e2',1)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🟡</div><span class="ar">أعرف بشكل عام لكنني لم أُغيّر طريقة عملي بناءً عليه</span><span class="en-text">I know generally but haven't changed my work approach based on it</span></div></div>
+          <div class="radio-option" onclick="pickRadio(this,'e2',2)"><div class="radio-dot"></div><div class="radio-label"><div class="radio-color">🔴</div><span class="ar">لم أكن أعرف هذا</span><span class="en-text">I didn't know this</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-disclaimer">
+      <span class="ar">⚠️ هذا التقييم أولي لأغراض توعوية وبحثية. لا يُغني عن المراجعة القانونية المتخصصة ولا يُشكّل استشارةً قانونية.</span>
+      <span class="en-text">⚠️ This assessment is preliminary for awareness and research purposes. It does not replace specialized legal review and does not constitute legal advice.</span>
+    </div>
+    <div class="tool-nav">
+      <button class="btn-ghost" onclick="goPanel(1)"><span class="ar">← السابق</span><span class="en-text">← Back</span></button>
+      <button class="btn-gold" id="btn-results" onclick="calculateResults()">
+        <span class="ar">عرض النتائج</span><span class="en-text">Show Results</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PANEL 3: RESULTS -->
+  <div class="tool-panel" id="panel3">
+    <div class="partial-notice" id="partialNotice" style="display:none">
+      <div class="partial-icon">⚠️</div>
+      <div class="partial-text" id="partialText"></div>
+      <button class="partial-cta" onclick="goPanel(2)"><span class="ar">أكمل الأسئلة المتبقية للحصول على تحليل أدق ←</span><span class="en-text">Complete remaining questions for a more accurate analysis →</span></button>
+    </div>
+    <div class="result-dual">
+      <div class="result-card">
+        <div class="result-card-title ar">تقييم الأداة</div>
+        <div class="result-card-title en-text">TOOL ASSESSMENT</div>
+        <div class="result-score-pct" id="toolScorePct">—</div>
+        <div class="result-score-sub ar">نسبة المخاطر</div>
+        <div class="result-score-sub en-text">Risk Rate</div>
+        <div class="result-level"><div class="level-badge" id="toolLevelBadge">—</div></div>
+        <p class="result-card-note ar">يُقيّم الأداة بغض النظر عن سلوكك</p>
+        <p class="result-card-note en-text">Evaluates the tool regardless of your behavior</p>
+      </div>
+      <div class="result-card">
+        <div class="result-card-title ar">تقييم سلوك الاستخدام</div>
+        <div class="result-card-title en-text">USAGE BEHAVIOR ASSESSMENT</div>
+        <div class="result-score-pct" id="behaviorScorePct">—</div>
+        <div class="result-score-sub ar">نسبة المخاطر</div>
+        <div class="result-score-sub en-text">Risk Rate</div>
+        <div class="result-level"><div class="level-badge" id="behaviorLevelBadge">—</div></div>
+        <p class="result-card-note ar">يُقيّم طريقة استخدامك أنت وفريقك</p>
+        <p class="result-card-note en-text">Evaluates how you and your team use the tool</p>
+      </div>
+    </div>
+    <div class="top3-section">
+      <div class="top3-title ar">أبرز 3 بنود تحتاج اهتمامك</div>
+      <div class="top3-title en-text">TOP 3 AREAS NEEDING YOUR ATTENTION</div>
+      <div id="top3List"></div>
+    </div>
+    <div class="usecase-rec" id="usecaseRec">
+      <div class="usecase-rec-title ar">توصية مخصصة لحالة استخدامك</div>
+      <div class="usecase-rec-title en-text">RECOMMENDATION FOR YOUR USE CASE</div>
+      <p id="usecaseRecText"></p>
+    </div>
+    <div class="tool-disclaimer">
+      <span class="ar">⚠️ هذا التقييم أولي لأغراض توعوية وبحثية. لا يُغني عن المراجعة القانونية المتخصصة ولا يُشكّل استشارةً قانونية.</span>
+      <span class="en-text">⚠️ This assessment is preliminary for awareness and research purposes. It does not replace specialized legal review and does not constitute legal advice.</span>
+    </div>
+    <div class="tool-nav" style="justify-content:center;gap:20px">
+      <button class="btn-ghost" onclick="resetTool()"><span class="ar">إعادة التقييم</span><span class="en-text">Start Over</span></button>
+      <a href="#contact" class="btn-gold"><span class="ar">تواصل للاستفسار</span><span class="en-text">Get in Touch</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="methodology">
+  <div class="section-label"><span class="ar">02 — المنهجية</span><span class="en-text">02 — METHODOLOGY</span></div>
+  <h2 class="section-title ar">إطار تقييم أدوات AI القانونية</h2>
+  <h2 class="section-title en-text">Framework for Evaluating Legal AI Tools</h2>
+  <p class="ar" style="color:var(--muted);max-width:640px;margin-bottom:12px">أعتمد في تقييم أدوات الذكاء الاصطناعي للعمل القانوني منهجية متعددة المعايير تجمع بين الأبعاد التقنية والقانونية والأخلاقية — لأن أداةً قد تكون فعّالة تقنياً وغير مقبولة مهنياً أو قانونياً في آنٍ واحد.</p>
+  <p class="en-text" style="color:var(--muted);max-width:640px;margin-bottom:12px;display:none">My evaluation framework for legal AI tools integrates technical, legal, and ethical dimensions — because a tool may be technically efficient yet professionally or legally unacceptable at the same time.</p>
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-num">01</div>
+      <div class="method-title ar">الأداء والموثوقية</div><div class="method-title en-text">Performance & Reliability</div>
+      <p class="method-text ar">دقة المخرجات، معدل الهلوسة، الاتساق عبر السياقات القانونية المختلفة، ومدى قابلية التحقق من النتائج.</p>
+      <p class="method-text en-text">Output accuracy, hallucination rates, consistency across legal contexts, and verifiability of results.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-num">02</div>
+      <div class="method-title ar">الامتثال القانوني والتنظيمي</div><div class="method-title en-text">Legal & Regulatory Compliance</div>
+      <p class="method-text ar">التوافق مع أنظمة حماية البيانات، قواعد السرية المهنية، والأطر التنظيمية للذكاء الاصطناعي المعمول بها.</p>
+      <p class="method-text en-text">Alignment with data protection regulations, professional confidentiality rules, and applicable AI regulatory frameworks.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-num">03</div>
+      <div class="method-title ar">المخاطر الأخلاقية والمهنية</div><div class="method-title en-text">Ethical & Professional Risks</div>
+      <p class="method-text ar">التحيزات الكامنة في النموذج، تأثير الأداة على استقلالية المحامي وحكمه المهني، والمساءلة عند الخطأ.</p>
+      <p class="method-text en-text">Model biases, impact on lawyer autonomy and professional judgment, and accountability in cases of error.</p>
+    </div>
+  </div>
+  <div class="methodology-more">
+    <a href="#articles" class="btn-more ar">للمزيد ←</a>
+    <a href="#articles" class="btn-more en-text">More →</a>
+  </div>
+</section>
+
+
+<section id="articles">
+  <div class="section-label"><span class="ar">03 — المقالات</span><span class="en-text">03 — ARTICLES</span></div>
+  <div class="articles-filter">
+    <button class="filter-btn active ar" onclick="filterArticles('all')">الكل</button>
+    <button class="filter-btn active en-text" onclick="filterArticles('all')">All</button>
+    <button class="filter-btn ar" onclick="filterArticles('ai-law')">قانون الذكاء الاصطناعي</button>
+    <button class="filter-btn en-text" onclick="filterArticles('ai-law')">AI Law</button>
+    <button class="filter-btn ar" onclick="filterArticles('ethics')">أخلاقيات التقنية</button>
+    <button class="filter-btn en-text" onclick="filterArticles('ethics')">Tech Ethics</button>
+    <button class="filter-btn ar" onclick="filterArticles('data')">تنظيم البيانات</button>
+    <button class="filter-btn en-text" onclick="filterArticles('data')">Data Regulation</button>
+  </div>
+  <div class="articles-grid">
+    <div class="article-card" data-category="ai-law" data-full-ar="يشهد القطاع القانوني تحولًا كبيرًا مع توسع استخدام تقنيات الذكاء الاصطناعي، حيث أصبحت الأدوات الذكية عنصرًا أساسيًا في دعم المحامين في مهام مثل البحث القانوني، مراجعة العقود، تحليل المستندات، وتقديم تقديرات تنبؤية للقضايا. وتشير تقارير دولية إلى ارتفاع اعتماد المحامين على الذكاء الاصطناعي التوليدي، خصوصًا في الصياغة القانونية.
+
+في السعودية، تسارعت وتيرة التحول الرقمي عبر منصّات مثل ناجز، إضافة إلى الاستراتيجية الوطنية للبيانات والذكاء الاصطناعي التي تقودها سدايا. كما ساهم نظام حماية البيانات الشخصية (PDPL) في وضع إطار تنظيمي يضمن الاستخدام الآمن والمسؤول لهذه التقنيات.
+
+ورغم الفوائد الكبيرة، إلا أن هناك تحديات مثل دقة المخرجات، حماية البيانات، والالتزام بالأطر الأخلاقية. لذلك تتجه مكاتب المحاماة إلى وضع سياسات واضحة للاستخدام المسؤول للذكاء الاصطناعي، تشمل المراجعة البشرية الإلزامية وضوابط التعامل مع البيانات.
+
+المصدر:  
+هذا ملخص لمقال منشور لدى Wazen
+https://wazenco.com/الذكاء-الاصطناعي-في-القانون-شراكة-بين/" data-full-en="The legal sector is undergoing a significant transformation as the use of artificial intelligence technologies continues to expand. Intelligent tools have become essential in supporting lawyers with tasks such as legal research, contract review, document analysis, and predictive case assessments. International reports indicate a growing reliance on generative AI among legal professionals, particularly for drafting and legal writing.
+
+In Saudi Arabia, the pace of digital transformation has accelerated through platforms like Najiz, alongside the National Data and AI Strategy led by SDAIA. The Personal Data Protection Law (PDPL) has also contributed to establishing a regulatory framework that ensures the safe and responsible use of these technologies.
+
+Despite the substantial benefits, challenges remain—such as output accuracy, data protection, and adherence to ethical and legal standards. As a result, law firms are increasingly adopting clear policies for responsible AI use, including mandatory human review and strict data-handling guidelines.
+
+Source:  
+This is a summary of an article published by Wazen
+https://wazenco.com/الذكاء-الاصطناعي-في-القانون-شراكة-بين/">
+      <span class="article-tag ar">قانون الذكاء الاصطناعي</span>
+      <span class="article-tag en-text">AI Law</span>
+      <h3 class="article-title ar">الذكاء الاصطناعي والممارسة القانونية</h3>
+      <h3 class="article-title en-text">AI and Legal Practice</h3>
+      <p class="article-excerpt ar">يشهد القطاع القانوني تحولًا كبيرًا مع توسع استخدام تقنيات الذكاء الاصطناعي، حيث أصبحت الأدوات الذكية عنصرًا أساسيًا في دعم المحامين في مهام مثل البحث القانوني، مراجعة العقود، تحليل المستندات، وتقديم تقديرات تنبؤية…</p>
+      <p class="article-excerpt en-text">The legal sector is undergoing a significant transformation as the use of artificial intelligence technologies continues to expand. Intelligent tools have become essential in supporting lawyers with tasks such as legal…</p>
+      <div class="article-meta">
+        <span><span class="ar">2026 — مقالات</span><span class="en-text">2026</span></span>
+        <button class="article-read-more ar" onclick="openArticleModal(this)">اقرأ المقال ←</button>
+        <button class="article-read-more en-text" onclick="openArticleModal(this)">Read Article →</button>
+      </div>
+    </div>
+    <div class="article-card" data-category="ethics" data-full-ar="تركّز توصية اليونسكو لأخلاقيات الذكاء الاصطناعي على وضع إطار قانوني وأخلاقي عالمي يضمن أن تطوير واستخدام تقنيات الذكاء الاصطناعي يتم بطريقة تحمي حقوق الإنسان، والكرامة الإنسانية، وسيادة القانون. تؤكد الوثيقة أن التأثيرات العميقة للذكاء الاصطناعي على المجتمعات تتطلب قواعد واضحة تستند إلى القانون الدولي ومبادئ العدالة والمساواة وعدم التمييز.
+
+تشدد التوصية على ضرورة الشفافية وقابلية فهم الأنظمة الخوارزمية، لما لذلك من أهمية في حماية الحقوق الأساسية ومنع التحيّز والتمييز. كما تؤكد على أهمية الإشراف البشري على أنظمة الذكاء الاصطناعي لضمان عدم اتخاذ قرارات مؤثرة على الأفراد دون رقابة قانونية مناسبة.
+
+وتبرز التوصية الحاجة إلى حوكمة قانونية قوية تشمل سياسات واضحة لإدارة البيانات، وضمان العدالة، وحماية الخصوصية، ومنع الانتهاكات التي قد تنتج عن سوء استخدام الذكاء الاصطناعي. كما تدعو الدول إلى تبني أطر تنظيمية تتماشى مع المبادئ الدولية، وتطبيق آليات تقييم أثر أخلاقي وقانوني قبل نشر الأنظمة.
+
+تركز الوثيقة كذلك على أن الذكاء الاصطناعي قد يعمّق الفجوات الرقمية والتمييز، مما يجعل العدالة والإنصاف عناصر أساسية في أي إطار قانوني ينظم هذه التقنيات. وتدعو التوصية إلى ضمان وصول عادل للتقنيات وحماية الفئات الضعيفة من المخاطر المحتملة.
+
+المصدر:
+هذا ملخص لمحتوى منشور على موقع اليونسكو:
+https://www.unesco.org/ar/artificial-intelligence/recommendation-ethics" data-full-en="UNESCO&#x27;s Recommendation on the Ethics of Artificial Intelligence focuses on establishing a global legal and ethical framework that ensures the development and use of AI technologies in a way that protects human rights, human dignity, and the rule of law. The document emphasizes that the profound impacts of AI on societies require clear rules grounded in international law and the principles of justice, equality, and non-discrimination.
+
+The recommendation stresses the need for transparency and the understandability of algorithmic systems, given their importance in protecting fundamental rights and preventing bias and discrimination. It also highlights the importance of human oversight over AI systems to ensure that decisions affecting individuals are not made without appropriate legal supervision.
+
+The recommendation further highlights the need for strong legal governance, including clear policies for data management, ensuring fairness, protecting privacy, and preventing violations that may result from the misuse of AI. It also calls on states to adopt regulatory frameworks aligned with international principles and to implement mechanisms for ethical and legal impact assessments before deploying AI systems.
+
+The document also notes that AI may deepen digital divides and discrimination, making justice and fairness essential components of any legal framework governing these technologies. The recommendation calls for ensuring equitable access to AI technologies and protecting vulnerable groups from potential risks.
+
+Source:
+This is a summary of content published on UNESCO&#x27;s website:
+https://www.unesco.org/ar/artificial-intelligence/recommendation-ethics">
+      <span class="article-tag ar">أخلاقيات التقنية</span>
+      <span class="article-tag en-text">Tech Ethics</span>
+      <h3 class="article-title ar">الأخلاقيات التقنية في السياق القانوني</h3>
+      <h3 class="article-title en-text">Tech Ethics in the Legal Context</h3>
+      <p class="article-excerpt ar">تركّز توصية اليونسكو لأخلاقيات الذكاء الاصطناعي على وضع إطار قانوني وأخلاقي عالمي يضمن أن تطوير واستخدام تقنيات الذكاء الاصطناعي يتم بطريقة تحمي حقوق الإنسان، والكرامة الإنسانية، وسيادة القانون. تؤكد الوثيقة أن…</p>
+      <p class="article-excerpt en-text">UNESCO's Recommendation on the Ethics of Artificial Intelligence focuses on establishing a global legal and ethical framework that ensures the development and use of AI technologies in a way that protects human rights,…</p>
+      <div class="article-meta">
+        <span><span class="ar">2026 — مقالات</span><span class="en-text">2026</span></span>
+        <button class="article-read-more ar" onclick="openArticleModal(this)">اقرأ المقال ←</button>
+        <button class="article-read-more en-text" onclick="openArticleModal(this)">Read Article →</button>
+      </div>
+    </div>
+    <div class="article-card" data-category="data" data-full-ar="يشهد الشرق الأوسط تطورًا متسارعًا في تنظيم القطاع الرقمي وحوكمة البيانات، مدفوعًا بالتحول الرقمي الواسع واعتماد الحكومات على التقنيات الحديثة. تتجه دول المنطقة إلى تحديث أطرها التشريعية لضمان حماية البيانات، وتعزيز الشفافية، وتنظيم العلاقة بين الجهات الحكومية والقطاع الخاص. كما يبرز التركيز على وضع سياسات واضحة لمعالجة البيانات، وإدارة المخاطر، وتطوير تشريعات تتماشى مع التطور التقني المتسارع، خصوصًا في مجالات الذكاء الاصطناعي والخدمات الرقمية.
+
+تتضمن التوجهات الإقليمية تعزيز الأمن السيبراني، تنظيم نقل البيانات عبر الحدود، ورفع مستوى الامتثال للمعايير الدولية. وتشير الاتجاهات إلى أن المنطقة تتجه نحو نماذج تنظيمية أكثر نضجًا، مع دور أكبر للجهات التنظيمية في مراقبة الامتثال وفرض العقوبات. تُعد المملكة العربية السعودية من أبرز الدول التي تقود التحول التنظيمي في القطاع الرقمي داخل المنطقة.
+
+تركّز السعودية على بناء إطار تنظيمي مرن يستجيب للتطور التقني، مع اهتمام خاص بتنظيم التقنيات الناشئة مثل الذكاء الاصطناعي، وتطوير ضوابط لنقل البيانات عبر الحدود، ورفع مستوى الأمن السيبراني.
+
+المصدر:
+ملخص لمحتوى منشور على موقع التميمي للمحاماة:
+https://www.tamimi.com/our-knowledge/publications/eyes-on-2026/articles/مستقبل-تنظيم-القطاع-الرقمي-والبيانات/" data-full-en="The Middle East is witnessing rapid developments in regulating the digital sector and data governance, driven by widespread digital transformation and the adoption of modern technologies by governments. Countries in the region are moving toward updating their legislative frameworks to ensure data protection, enhance transparency, and regulate the relationship between government entities and the private sector. There is also a growing focus on establishing clear policies for data processing, risk management, and developing regulations that keep pace with fast-evolving technologies.
+
+Regional trends include strengthening cybersecurity, regulating cross-border data transfers, and raising compliance with international standards. These developments indicate that the region is moving toward more mature regulatory models, with a greater role for regulatory authorities in monitoring compliance and enforcing penalties.
+
+Saudi Arabia is one of the leading countries driving regulatory transformation in the digital sector within the region. The Kingdom is working on developing an advanced legislative framework that supports digital transformation and ensures data protection, in line with the objectives of Vision 2030.
+
+Source:
+Summary of content published on Al-Tamimi &amp; Company&#x27;s website:
+https://www.tamimi.com/our-knowledge/publications/eyes-on-2026/articles/مستقبل-تنظيم-القطاع-الرقمي-والبيانات/">
+      <span class="article-tag ar">تنظيم البيانات</span>
+      <span class="article-tag en-text">Data Regulation</span>
+      <h3 class="article-title ar">تنظيم البيانات في العالم العربي</h3>
+      <h3 class="article-title en-text">Data Regulation in the Arab World</h3>
+      <p class="article-excerpt ar">يشهد الشرق الأوسط تطورًا متسارعًا في تنظيم القطاع الرقمي وحوكمة البيانات، مدفوعًا بالتحول الرقمي الواسع واعتماد الحكومات على التقنيات الحديثة. تتجه دول المنطقة إلى تحديث أطرها التشريعية لضمان حماية البيانات، وتعزيز…</p>
+      <p class="article-excerpt en-text">The Middle East is witnessing rapid developments in regulating the digital sector and data governance, driven by widespread digital transformation and the adoption of modern technologies by governments. Countries in the…</p>
+      <div class="article-meta">
+        <span><span class="ar">2026 — مقالات</span><span class="en-text">2026 — مقالات</span></span>
+        <button class="article-read-more ar" onclick="openArticleModal(this)">اقرأ المقال ←</button>
+        <button class="article-read-more en-text" onclick="openArticleModal(this)">Read Article →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label"><span class="ar">04 — عني</span><span class="en-text">04 — ABOUT</span></div>
+  <div class="about-logo-wrap">
+    <img src="logo.png" alt="شعار فاطمة برناوي — Fatimah Barnawi" class="about-logo">
+  </div>
+  <div class="about-text">
+    <h2 class="section-title ar">خلفيتي المهنية والأكاديمية</h2>
+    <h2 class="section-title en-text">Professional & Academic Background</h2>
+    <p class="ar">أقف في منطقة التقاطع الحيوية بين الممارسة القانونية الرصينة والبحث الأكاديمي المعمق، حيث أكرس مساري المهني لاستكشاف آفاق التنظيم التقني في عصر الذكاء الاصطناعي. لا أتعامل مع القانون كأداة إجرائية فحسب، بل كإطار حيوي يتقاطع مع الأخلاقيات الرقمية والفلسفة الإنسانية، بهدف صياغة استراتيجيات تشريعية استباقية تواكب التسارع التقني المذهل..</p>
+    <p class="en-text">Standing at the vital intersection of rigorous legal practice and academic research, I dedicate my career to exploring the evolving horizons of technological regulation within the realm of Artificial Intelligence. I view the law not merely as a procedural instrument, but as a dynamic framework intertwined with digital ethics and philosophy, aiming to cultivate proactive legislative strategies that effectively navigate the complexities of rapid technological advancement.</p>
+    <p class="ar">تمحور مشروعي البحثي حول قضية جوهرية: كيف يمكننا تسخير الابتكار لرفع جودة الحياة البشرية دون السقوط في فخ التبعية للآلة؟ ومن هذا المنطلق، أتبنى رؤية شمولية تدمج بين ثلاثة أبعاد أساسية؛ العمق الفلسفي الذي يفهم أبعاد العلاقة بين الإنسان والتقنية، والمنظور التشريعي الذي يضع الحدود التنظيمية، والضوابط الأخلاقية التي تضمن صون الإرادة الحرة. أسعى من خلال هذا النهج إلى المساهمة في بناء بيئة قانونية تضمن أن يظل الذكاء الاصطناعي أداة لتمكين الإنسان وتعزيز إمكاناته، لا بديلاً عنه </p>
+    <p class="en-text">  My work is driven by a fundamental inquiry into how innovation can enhance human life without compromising individual autonomy or leading to machine dependency. By adopting a holistic vision that integrates philosophical depth, legislative precision, and ethical safeguards, I strive to champion a legal landscape where Artificial Intelligence serves as a catalyst for human empowerment. Ensuring that technology remains a tool for potential rather than a substitute for human agency and decision-making.</p>
+    <div class="cv-highlights">
+      <div class="cv-item">
+        <div class="cv-year">2025-Now </div>
+        <div class="cv-desc">
+          <strong class="ar">جامعة يورك</strong><strong class="en-text">University of York</strong>
+          <small class="ar">دكتوراه الفلسفة في القانون</small><small class="en-text">PhD in Law</small>
+        </div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-year">2022 -Now</div>
+        <div class="cv-desc">
+          <strong class="ar">عضو هيئة تدريس</strong><strong class="en-text">Faculty member</strong>
+          <small class="ar">جامعة الملك خالد</small><small class="en-text">King Khalid University</small>
+        </div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-year">2025</div>
+        <div class="cv-desc">
+          <strong class="ar">مؤتمر الرياض الدولي للفلسفة</strong><strong class="en-text">Riyadh International Philosophy Conference</strong>
+          <small class="ar">ورقة علمية بعنوان: "التحيزات الخفية والمعرفية في نماذج اللغة الكبرى"</small><small class="en-text">Presented a research paper titled: "Hidden and Cognitive Biases in Large Language Models".</small>
+        </div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-year">2026</div>
+        <div class="cv-desc">
+          <strong class="ar">نشر علمي محكم</strong><strong class="en-text">AJSRP: Journal of Economic, Administrative and Legal Sciences, Vol. 9. DOI: 10.26389/AJSRP.B240225</strong>
+          <small class="ar">صنع القرار القضائي: تحليل شامل للعوامل والقيود والأطر النظرية</small><small class="en-text">Judicial Decision-Making: A Comprehensive Analysis of Factors, Constraints, and Theoretical Frameworks.</small>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label"><span class="ar">05 — التواصل</span><span class="en-text">05 — CONTACT</span></div>
+  <p class="contact-text ar">سواء كنت تبحث عن استشارة متخصصة في تقاطع التقنية والقانون، أو تودّ التعاون في كتابة أو مساهمة أكاديمية، أو الالتحاق بإحدى الدورات التدريبية القادمة — يسعدني التواصل.</p>
+  <p class="contact-text en-text">Whether you're seeking specialized consultation at the intersection of law and technology, exploring collaboration on writing or academic contributions, or interested in upcoming training courses — I'd be glad to connect.</p>
+  <div class="contact-services">
+    <div class="contact-service-card">
+      <div class="contact-service-icon">🔍</div>
+      <div class="contact-service-title ar">الاستشارات التخصصية</div>
+      <div class="contact-service-title en-text">Specialist Consulting</div>
+      <p class="contact-service-desc ar">تقييم أدوات AI القانونية وملاءمتها للبيئة التنظيمية والمهنية، وتقديم توصيات قابلة للتطبيق للفرق القانونية.</p>
+      <p class="contact-service-desc en-text">Evaluating legal AI tools for regulatory and professional fit, providing actionable recommendations for legal teams.</p>
+      <ul class="contact-service-items">
+        <li><span class="ar">تقييم ومقارنة الأدوات</span><span class="en-text">Tool evaluation & comparison</span></li>
+        <li><span class="ar">سياسات استخدام AI الداخلية</span><span class="en-text">Internal AI usage policies</span></li>
+        <li><span class="ar">الامتثال والمخاطر</span><span class="en-text">Compliance & risk mapping</span></li>
+      </ul>
+    </div>
+    <div class="contact-service-card">
+      <div class="contact-service-icon">✍️</div>
+      <div class="contact-service-title ar">الكتابة والمساهمات</div>
+      <div class="contact-service-title en-text">Writing & Contributions</div>
+      <p class="contact-service-desc ar">مقالات بحثية، تقارير، وتعليقات تحليلية على السياسات والتشريعات المتعلقة بتنظيم الذكاء الاصطناعي.</p>
+      <p class="contact-service-desc en-text">Research articles, reports, and analytical commentary on AI regulation policies and legislation.</p>
+      <ul class="contact-service-items">
+        <li><span class="ar">تقارير للمؤسسات والهيئات</span><span class="en-text">Institutional reports</span></li>
+        <li><span class="ar">تحليل السياسات التشريعية</span><span class="en-text">Legislative policy analysis</span></li>
+        <li><span class="ar">المشاركة في المؤتمرات</span><span class="en-text">Conference participation</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:Fatimah.a.Barnawi@gmail.com" class="contact-link">✉ <span class="ar">تواصل عام</span><span class="en-text">General Inquiries</span></a>
+    <a href="mailto:Fatimah.a.Barnawi@gmail.com" class="contact-link">🎓 <span class="ar">تعاون أكاديمي</span><span class="en-text">Academic Collaboration</span></a>
+    <a href="https://www.linkedin.com/in/fatimah-barnawi-13303a128/" class="contact-link" target="_blank">in <span>LinkedIn</span></a>
+  </div>
+</section>
+
+
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="articleModal" onclick="closeModalIfOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeArticleModal()">✕ <span class="ar">إغلاق</span><span class="en-text">Close</span></button>
+    <span class="modal-tag" id="modalTag"></span>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-meta" id="modalMeta"></div>
+  </div>
+</div>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">↑</button>
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress-bar" id="scrollProgressBar"><div class="scroll-progress-fill" id="scrollProgressFill"></div></div>
+<div class="scroll-progress-label" id="scrollProgressLabel"></div>
+<footer>
+  <span class="footer-copy ar">© 2026 — الذكاآلي القانوني — فاطمة برناوي — جميع الحقوق محفوظة</span>
+  <span class="footer-copy en-text">© 2026 — Al-Thaka'ali — Fatimah Barnawi — All rights reserved</span>
+  <span class="footer-mark">Law × AI</span>
+</footer>
+
+<script>
+// ── LANGUAGE TOGGLE ──
+function setLang(lang) {
+  document.body.className = lang;
+  document.documentElement.setAttribute('dir', lang==='ar'?'rtl':'ltr');
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim()===lang.toUpperCase()));
+  // Remove any lingering inline display styles so CSS classes take over
+  document.querySelectorAll('.ar,.en-text').forEach(el => el.style.removeProperty('display'));
+  localStorage.setItem('lang', lang);
+}
+const savedLang = localStorage.getItem('lang');
+if (savedLang) setLang(savedLang);
+
+// ── ARTICLE FILTER ──
+function filterArticles(cat) {
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    const t = btn.textContent.trim().toLowerCase();
+    if (cat==='all' && (t==='الكل'||t==='all')) btn.classList.add('active');
+    else if (cat==='ai-law' && (t.includes('ذكاء')||t.includes('ai law'))) btn.classList.add('active');
+    else if (cat==='ethics' && (t.includes('أخلاق')||t.includes('ethics'))) btn.classList.add('active');
+    else if (cat==='data' && (t.includes('بيانات')||t.includes('data'))) btn.classList.add('active');
+  });
+  document.querySelectorAll('.article-card').forEach(card => {
+    card.classList.toggle('hidden', cat!=='all' && card.dataset.category!==cat);
+  });
+}
+
+// ── USE CASE ──
+let selectedCase = null;
+const caseAlerts = {
+  contract:{ar:'صياغة العقود من أكثر المجالات حساسيةً — أي خطأ في البند قد يُبطل الحق أو يُنشئ التزاماً غير مقصود. تأكد أن كل مخرج يمر بمراجعتك الكاملة قبل التوقيع.',en:'Contract drafting is among the most sensitive areas — any clause error may void a right or create an unintended obligation. Ensure every output passes your full review before signing.'},
+  research:{ar:'البحث القانوني بالذكاء الاصطناعي قد يُنتج مراجع غير موجودة أو أحكاماً ملفّقة. تحقق من كل مرجع في المصدر الأصلي قبل الاعتماد عليه.',en:'AI legal research may produce non-existent references or fabricated rulings. Verify every reference in its original source before relying on it.'},
+  litigation:{ar:'في التقاضي، المخرج الخاطئ قد يصل إلى ملف المحكمة. تحقق أن الأداة التي تستخدمها لا ترسل بيانات موكّلك لخوادم خارجية.',en:'In litigation, a wrong output may reach the court file. Verify that the tool you\'re using doesn\'t send your client\'s data to external servers.'},
+  compliance:{ar:'متطلبات الامتثال تتغير باستمرار. الأداة التي تستخدمها قد لا تعكس آخر التحديثات التنظيمية — تحقق دائماً من المصدر الرسمي.',en:'Compliance requirements change continuously. The tool may not reflect the latest regulatory updates — always verify from the official source.'},
+  'due-diligence':{ar:'الفحص القانوني يتطلب استيعاب كامل الوثيقة — الذكاء الاصطناعي قد يُغفل بنوداً دقيقة أو يُفسّر لغةً غامضة بشكل خاطئ.',en:'Due diligence requires full document comprehension — AI may overlook subtle clauses or misinterpret ambiguous language.'},
+  academic:{ar:'استخدام الذكاء الاصطناعي في البحث الأكاديمي القانوني يخضع لسياسات مختلفة بين المؤسسات — تحقق من سياسة مؤسستك قبل الاستخدام.',en:'Using AI in academic legal research is subject to varying institutional policies — verify your institution\'s policy before use.'}
+};
+
+function selectCase(el) {
+  document.querySelectorAll('.usecase-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedCase = el.dataset.case;
+  document.getElementById('btn-next1').disabled = false;
+  const isAr = !document.body.classList.contains('en');
+  const d = caseAlerts[selectedCase];
+  document.getElementById('contextAlertText').textContent = d ? (isAr?d.ar:d.en) : '';
+  document.getElementById('contextAlert').classList.add('visible');
+}
+
+// ── WEIGHTS ──
+const weights = {
+  a1:{contract:2,research:1,litigation:2,compliance:1.5,'due-diligence':1,academic:1},
+  a2:{contract:2,research:1,litigation:2,compliance:1.5,'due-diligence':1.5,academic:1},
+  a3:{contract:1.5,research:1,litigation:2,compliance:2,'due-diligence':1,academic:1},
+  a5:{contract:2,research:1,litigation:2,compliance:1.5,'due-diligence':1.5,academic:1},
+  b1:{contract:1.5,research:2,litigation:1.5,compliance:1.5,'due-diligence':2,academic:1.5},
+  b2:{contract:1,research:2,litigation:2,compliance:1,'due-diligence':2,academic:2},
+  b3:{contract:1,research:1.5,litigation:1,compliance:1,'due-diligence':1.5,academic:1.5},
+  b4:{contract:1.5,research:2,litigation:2,compliance:1,'due-diligence':2,academic:2},
+  c1:{contract:2,research:1.5,litigation:1.5,compliance:1.5,'due-diligence':1.5,academic:1},
+  c2:{contract:1.5,research:1.5,litigation:1.5,compliance:1.5,'due-diligence':1.5,academic:1},
+  c3:{contract:1,research:1.5,litigation:1.5,compliance:1.5,'due-diligence':1.5,academic:1},
+  d1:{contract:2,research:1.5,litigation:2,compliance:1.5,'due-diligence':1.5,academic:1},
+  d2:{contract:1.5,research:1.5,litigation:1.5,compliance:1.5,'due-diligence':1.5,academic:1},
+  d3:{contract:2,research:1,litigation:2,compliance:1.5,'due-diligence':1,academic:1},
+  e1:{contract:1.5,research:1.5,litigation:1.5,compliance:1.5,'due-diligence':1.5,academic:1},
+  e2:{contract:1,research:2,litigation:1.5,compliance:2,'due-diligence':1.5,academic:1.5}
+};
+const toolQs=['a1','a2','a3','a5','b1','b2','e1'];
+const behaviorQs=['b3','b4','c1','c2','c3','d1','d2','d3','e2'];
+const TOTAL_Q=16;
+const answers={};
+
+// ── RADIO ──
+function pickRadio(el,qId,pts) {
+  el.closest('.question-item').querySelectorAll('.radio-option').forEach(o=>{o.className=o.className.replace(/\s*sel-\d/g,'')});
+  el.classList.add('sel-'+pts);
+  answers[qId]=pts;
+  updateProgress();
+}
+function updateProgress() {
+  const n=Object.keys(answers).length;
+  document.getElementById('progress-fill').style.width=(n/TOTAL_Q*100)+'%';
+}
+
+// ── SCROLL PROGRESS BAR ──
+function initScrollProgress() {
+  const toolSection = document.getElementById('tool');
+  const bar = document.getElementById('scrollProgressBar');
+  const fill = document.getElementById('scrollProgressFill');
+  const label = document.getElementById('scrollProgressLabel');
+  const isAr = !document.body.classList.contains('en');
+  
+  window.addEventListener('scroll', () => {
+    const panel2 = document.getElementById('panel2');
+    if (!panel2 || !panel2.classList.contains('active')) {
+      bar.classList.remove('visible');
+      label.classList.remove('visible');
+      return;
+    }
+    const rect = toolSection.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      bar.classList.add('visible');
+      label.classList.add('visible');
+      const n = Object.keys(answers).length;
+      const pct = Math.round(n/TOTAL_Q*100);
+      fill.style.width = pct+'%';
+      label.textContent = isAr ? (n+' من '+TOTAL_Q+' سؤال') : (n+' of '+TOTAL_Q+' answered');
+    } else {
+      bar.classList.remove('visible');
+      label.classList.remove('visible');
+    }
+  });
+}
+setTimeout(initScrollProgress, 100);
+
+// ── PANELS ──
+function goPanel(n) {
+  document.querySelectorAll('.tool-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel'+n).classList.add('active');
+  for(let i=1;i<=3;i++){const d=document.getElementById('dot'+i);if(!d)continue;d.classList.remove('active','done');if(i<n)d.classList.add('done');else if(i===n)d.classList.add('active');}
+  document.getElementById('tool').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── LEVEL ──
+function getLevel(pct,isAr){
+  if(pct<=25)return{label:isAr?'🟢 منخفض':'🟢 Low',cls:'level-low'};
+  if(pct<=50)return{label:isAr?'🟡 متوسط':'🟡 Moderate',cls:'level-med'};
+  if(pct<=75)return{label:isAr?'🟠 عالٍ':'🟠 High',cls:'level-high'};
+  return{label:isAr?'🔴 حرج':'🔴 Critical',cls:'level-critical'};
+}
+
+// ── QUESTION META ──
+const qNames={
+  a1:{ar:'مسار البيانات',en:'Data Routing'},a2:{ar:'سياسة التدريب',en:'Training Policy'},
+  a3:{ar:'موقع الخوادم',en:'Server Location'},
+  a5:{ar:'تجهيل البيانات',en:'Data Anonymization'},b1:{ar:'مؤشر الثقة',en:'Confidence Indicator'},
+  b2:{ar:'المصادر والمراجع',en:'Sources & References'},b3:{ar:'معرفة المسألة مسبقاً',en:'Prior Knowledge Check'},
+  b4:{ar:'التحقق بعد المخرج',en:'Post-Output Verification'},c1:{ar:'تحديد السياق والمصادر',en:'Context Specification'},
+  c2:{ar:'تحديد المطلوب بدقة',en:'Output Specification'},c3:{ar:'تجزئة المهام',en:'Task Decomposition'},
+  d1:{ar:'أثر الأتمتة',en:'Automation Bias'},d2:{ar:'التدريب والتأهيل',en:'Training & Preparation'},
+  d3:{ar:'إفصاح العميل',en:'Client Disclosure'},e1:{ar:'قابلية التفسير',en:'Explainability'},
+  e2:{ar:'الوعي بالتحيز',en:'Bias Awareness'}
+};
+const qRecs={
+  a1:{ar:'راجع سياسة الخصوصية واكتشف أين تُخزّن بياناتك وبيانات موكّليك.',en:'Review the privacy policy to discover where your and client data are stored.'},
+  a2:{ar:'ابحث في إعدادات حسابك عن خيار إيقاف استخدام بياناتك للتدريب.',en:'Check account settings for an option to opt out of training data usage.'},
+  a3:{ar:'تحقق من وثائق الأداة لمعرفة موقع خوادمها وقوانين حماية البيانات المطبّقة.',en:'Check tool documentation to identify server location and applicable data protection laws.'},
+  a5:{ar:'ضع بروتوكولاً واضحاً لتجهيل أسماء وأرقام الموكّلين قبل أي إدخال.',en:'Establish a clear protocol to anonymize client names and numbers before any input.'},
+  b1:{ar:'اعتمد مبدأ التحقق الدائم بصرف النظر عن مستوى ثقة الأداة.',en:'Adopt a principle of constant verification regardless of the tool\'s confidence level.'},
+  b2:{ar:'لا تقبل أي معلومة قانونية دون التحقق منها في مصدرها الرسمي الأصلي.',en:'Never accept legal information without verifying it in its official original source.'},
+  b3:{ar:'ابدأ باختبار الأداة في مسائل تعرف إجابتها لقياس دقتها في سياقك.',en:'Start by testing the tool on questions you know the answer to, to measure its accuracy.'},
+  b4:{ar:'ضع خطوة تحقق إلزامية في سير عملك قبل اعتماد أي مخرج.',en:'Build a mandatory verification step into your workflow before approving any output.'},
+  c1:{ar:'حدد الولاية القضائية والنظام القانوني وارفق النصوص ذات الصلة في كل أمر.',en:'Specify jurisdiction, legal system, and attach relevant texts in every prompt.'},
+  c2:{ar:'حدد نوع المخرج والشكل المطلوب والقيود في كل طلب.',en:'Specify output type, required format, and constraints in every request.'},
+  c3:{ar:'قسّم المهام المعقدة إلى خطوات وتحقق من كل خطوة قبل الانتقال للتالية.',en:'Break complex tasks into steps and verify each step before moving to the next.'},
+  d1:{ar:'تعامل مع كل مخرج كمسوّدة أولى — راجعه بنفس العمق الذي تراجع به عمل زميل.',en:'Treat every output as a first draft — review it with the same depth as a colleague\'s work.'},
+  d2:{ar:'نظّم جلسة توعية للفريق حول حدود هذه الأدوات وكيفية التحقق من مخرجاتها.',en:'Organize a team awareness session on tool limits and how to verify their outputs.'},
+  d3:{ar:'ضع سياسة إفصاح واضحة توضح متى وكيف تُبلغ الموكّلين باستخدام أدوات AI.',en:'Establish a clear disclosure policy defining when and how to inform clients about AI tool use.'},
+  e1:{ar:'استفسر دائماً عن مصادر الأداة واستدلالها — الإجابة غير المفسّرة لا تكفي.',en:'Always inquire about the tool\'s sources and reasoning — an unexplained answer is not enough.'},
+  e2:{ar:'احذر من تطبيق مخرجات الأداة مباشرةً في السياق القانوني السعودي أو العربي دون مراجعة.',en:'Be cautious about directly applying outputs in the Saudi or Arab legal context without review.'}
+};
+const caseRecs={
+  contract:{ar:k=>k==='critical'?'تقييم الأداة في صياغة العقود جاء حرجاً. يُنصح بعدم استخدامها حتى تُحسم المخاوف المتعلقة بالخصوصية والموثوقية.':'في صياغة العقود، راجع كل مخرج سطراً سطراً، وتحقق من اتساق الصياغة مع القانون المحلي، ولا تُرسل أي وثيقة دون مراجعتك الكاملة المستقلة.',en:k=>k==='critical'?'Tool assessment for contract drafting came at a critical level. It is advised not to use it for drafting until privacy and reliability concerns are resolved.':'In contract drafting, review every output line by line, verify consistency with local law, and never send any document without your full independent review.'},
+  research:{ar:k=>'في البحث القانوني، تحقق من كل حكم وكل مادة في مصدرها الرسمي — لا تكتفِ بما تُنتجه الأداة.',en:k=>'In legal research, verify every ruling and every article in its official source — don\'t rely solely on what the tool produces.'},
+  litigation:{ar:k=>k==='critical'?'تقييم الأداة في سياق التقاضي جاء حرجاً. يُنصح بمراجعة عاجلة لأداة عملك قبل أي استخدام في ملفات قضائية.':'في التقاضي، تأكد أن كل مرجع موجود فعلياً وأن كل حجة مبنية على استدلالك المستقل.',en:k=>k==='critical'?'Tool assessment in litigation context came as critical. An urgent review of your work tool is recommended before use in actual legal cases.':'In litigation, ensure every reference actually exists and every argument is built on your independent reasoning.'},
+  compliance:{ar:k=>'الأنظمة تتغير — تحقق دائماً من المصدر الرسمي للجهة التنظيمية قبل اعتماد أي تقييم امتثال.',en:k=>'Regulations change — always verify from the official source of the relevant regulatory authority before adopting any compliance assessment.'},
+  'due-diligence':{ar:k=>'استخدم الأداة لتسريع المراجعة الأولية، لكن لا تعتمد عليها وحدها في الحكم على اكتمال الفحص أو سلامة الوثيقة.',en:k=>'Use the tool to accelerate initial review, but don\'t rely on it alone to judge the completeness or soundness of documents.'},
+  academic:{ar:k=>'الأمانة العلمية تقتضي الإشارة لاستخدام أدوات AI في البحث. تحقق من سياسة مؤسستك، وتأكد أن الأداة لا تُنتج محتوى منسوباً لمصادر غير موجودة.',en:k=>'Academic integrity requires disclosing AI tool use in research. Verify your institution\'s policy, and ensure the tool doesn\'t produce content attributed to non-existent sources.'}
+};
+
+// ── CALCULATE ──
+function calculateResults() {
+  const isAr=!document.body.classList.contains('en');
+  const sc=selectedCase||'contract';
+  const answeredCount = Object.keys(answers).length;
+  
+  // Show partial notice if not all answered
+  const partialNotice = document.getElementById('partialNotice');
+  const partialText = document.getElementById('partialText');
+  if (answeredCount < TOTAL_Q) {
+    partialNotice.style.display = 'block';
+    partialText.textContent = isAr 
+      ? 'تم التقييم بناءً على '+answeredCount+' من '+TOTAL_Q+' سؤال — النتيجة تقريبية'
+      : 'Assessment based on '+answeredCount+' of '+TOTAL_Q+' questions — results are approximate';
+  } else {
+    partialNotice.style.display = 'none';
+  }
+  
+  let tS=0,tM=0;
+  toolQs.forEach(q=>{const w=weights[q]?weights[q][sc]||1:1;if(answers[q]!==undefined){tS+=answers[q]*w;}tM+=2*w;});
+  let bS=0,bM=0;
+  behaviorQs.forEach(q=>{const w=weights[q]?weights[q][sc]||1:1;if(answers[q]!==undefined){bS+=answers[q]*w;}bM+=2*w;});
+  const tP=tM>0?Math.round(tS/tM*100):0, bP=bM>0?Math.round(bS/bM*100):0;
+  const tL=getLevel(tP,isAr), bL=getLevel(bP,isAr);
+  const tKey=tP<=25?'low':tP<=50?'moderate':tP<=75?'high':'critical';
+  document.getElementById('toolScorePct').textContent=tP+'%';
+  document.getElementById('behaviorScorePct').textContent=bP+'%';
+  const tb=document.getElementById('toolLevelBadge');tb.textContent=tL.label;tb.className='level-badge '+tL.cls;
+  const bb=document.getElementById('behaviorLevelBadge');bb.textContent=bL.label;bb.className='level-badge '+bL.cls;
+  const sorted=Object.keys(answers).map(q=>({q,w:(weights[q]?weights[q][sc]||1:1)*answers[q]})).sort((a,b)=>b.w-a.w).slice(0,3);
+  let html='';
+  sorted.forEach(({q})=>{
+    const nm=qNames[q]?(isAr?qNames[q].ar:qNames[q].en):q;
+    const rc=qRecs[q]?(isAr?qRecs[q].ar:qRecs[q].en):'';
+    const v=answers[q];const bc=v===2?'level-critical':v===1?'level-med':'level-low';const ico=v===2?'🔴':v===1?'🟡':'🟢';
+    html+=`<div class="top3-item"><span class="level-badge ${bc}" style="font-size:10px;padding:3px 8px">${ico}</span><div class="top3-content"><div class="top3-name">${nm}</div><div class="top3-rec">${rc}</div></div></div>`;
+  });
+  document.getElementById('top3List').innerHTML=html;
+  const rf=caseRecs[sc];
+  if(rf)document.getElementById('usecaseRecText').textContent=isAr?rf.ar(tKey):rf.en(tKey);
+  goPanel(3);
+}
+
+// ── RESET ──
+function resetTool() {
+  Object.keys(answers).forEach(k=>delete answers[k]);
+  document.querySelectorAll('.radio-option').forEach(o=>{o.className=o.className.replace(/\s*sel-\d/g,'')});
+  document.querySelectorAll('.usecase-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('contextAlert').classList.remove('visible');
+  selectedCase=null;
+  document.getElementById('btn-next1').disabled=true;
+  document.getElementById('progress-fill').style.width='0%';
+  document.getElementById('partialNotice').style.display='none';
+  goPanel(1);
+}
+
+
+// ── MOBILE NAV ──
+function toggleMobileNav() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+
+// ── BACK TO TOP ──
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+// ── ARTICLE MODAL ──
+function openArticleModal(el) {
+  const card = el.closest('.article-card');
+  if (!card) return;
+  const isAr = !document.body.classList.contains('en');
+  const tag = card.querySelector(isAr ? '.article-tag.ar' : '.article-tag.en-text');
+  const title = card.querySelector(isAr ? '.article-title.ar' : '.article-title.en-text');
+  const meta = card.querySelector('.article-meta span:first-child');
+  document.getElementById('modalTag').textContent = tag ? tag.textContent : '';
+  document.getElementById('modalTitle').textContent = title ? title.textContent : '';
+  // Use full text from data attribute
+  const fullText = isAr ? (card.dataset.fullAr || '') : (card.dataset.fullEn || '');
+  document.getElementById('modalBody').innerHTML = fullText.replace(/https?:\/\/\S+/g, url => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`);
+  document.getElementById('modalMeta').textContent = meta ? meta.textContent : '';
+  document.getElementById('articleModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeArticleModal() {
+  document.getElementById('articleModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalIfOutside(e) {
+  if (e.target === document.getElementById('articleModal')) closeArticleModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticleModal(); });
+
+// ── RESET TOOL (add restart button logic) ──
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}});
+});
+</script>
+</body>
+</html>
